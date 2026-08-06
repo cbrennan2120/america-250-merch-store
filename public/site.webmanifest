@@ -1,0 +1,13 @@
+{
+  "name": "Spirit of 1776",
+  "short_name": "Spirit 1776",
+  "description": "Family-friendly American history and original commemorative goods.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fffdf7",
+  "theme_color": "#13263d",
+  "icons": [
+    { "src": "/assets/brand/favicon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/brand/favicon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
