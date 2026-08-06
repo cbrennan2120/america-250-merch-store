@@ -29,7 +29,7 @@ Production build output is written to `dist/`.
 
 ## Store status
 
-The site intentionally labels all products as prelaunch until the owner completes the account-only steps in [`STORE-LAUNCH-CHECKLIST.md`](STORE-LAUNCH-CHECKLIST.md). Once products are published, replace each `productUrl`, change `availability` to `live`, confirm final pricing, and rebuild. Validation prevents a live product from shipping without a product-specific URL.
+All three products are published in the Printify Pop-Up Store at `shop.spiritof1776.store`. Each product card uses a product-specific URL, and content validation prevents a live product from shipping without one.
 
 ## Artwork
 

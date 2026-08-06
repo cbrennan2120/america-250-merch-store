@@ -39,15 +39,15 @@ test("quiz can be completed, explained, shared, and retried", async ({ page }) =
   await expect(page.locator("[data-quiz-result]")).toBeHidden();
 });
 
-test("prelaunch products are transparent and link to the real Printify storefront", async ({ page }) => {
+test("live products link to their product-specific Printify pages", async ({ page }) => {
   await page.goto("/shop/");
   await expect(page.locator(".product-card")).toHaveCount(3);
-  await expect(page.getByText("Store setup in progress")).toHaveCount(3);
+  await expect(page.getByText("Available now")).toHaveCount(3);
   const links = page.locator("[data-product-link]");
   await expect(links).toHaveCount(3);
-  for (const link of await links.all()) {
-    await expect(link).toHaveAttribute("href", "https://the-spirit-of-1776.printify.me/");
-  }
+  await expect(links.nth(0)).toHaveAttribute("href", "https://shop.spiritof1776.store/product/30706124");
+  await expect(links.nth(1)).toHaveAttribute("href", "https://shop.spiritof1776.store/product/30706127");
+  await expect(links.nth(2)).toHaveAttribute("href", "https://shop.spiritof1776.store/product/30706156");
 });
 
 test("analytics stays unloaded on an unapproved local hostname", async ({ page }) => {

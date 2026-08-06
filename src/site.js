@@ -5,8 +5,8 @@ import { injectStructuredData } from "./structured-data.js";
 
 function productCard(product) {
   const target = product.productUrl || product.storeUrl;
-  const status = product.availability === "prelaunch" ? "Store setup in progress" : "Available now";
-  const action = product.availability === "prelaunch" ? "Preview storefront" : "View product";
+  const status = "Available now";
+  const action = "View product";
   return `
     <article class="product-card" id="${product.id}">
       <picture>
