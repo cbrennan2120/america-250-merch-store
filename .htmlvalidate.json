@@ -1,0 +1,16 @@
+{
+  "extends": ["html-validate:recommended"],
+  "rules": {
+    "attr-quotes": "error",
+    "close-order": "error",
+    "doctype-style": "error",
+    "element-permitted-content": "error",
+    "element-required-attributes": "error",
+    "heading-level": "error",
+    "no-dup-id": "error",
+    "no-inline-style": "error",
+    "no-redundant-role": "off",
+    "require-sri": "off",
+    "wcag/h37": "error"
+  }
+}

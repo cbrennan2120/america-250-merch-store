@@ -1,0 +1,29 @@
+{
+  "name": "spirit-of-1776",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "assets": "node scripts/build-assets.mjs",
+    "validate:content": "node scripts/validate-content.mjs",
+    "build": "npm run assets && npm run validate:content && vite build && node scripts/postbuild.mjs",
+    "test": "vitest run",
+    "test:html": "html-validate \"*.html\" \"stories/**/*.html\" \"timeline/**/*.html\" \"quiz/**/*.html\" \"shop/**/*.html\" \"about/**/*.html\" \"privacy/**/*.html\" \"404.html\"",
+    "test:links": "node scripts/check-links.mjs",
+    "test:e2e": "playwright test",
+    "check": "npm run test && npm run test:html && npm run test:links && npm run build"
+  },
+  "engines": {
+    "node": ">=22.12"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
+    "@playwright/test": "^1.62.1",
+    "html-validate": "^11.6.2",
+    "sharp": "^0.35.3",
+    "text-to-svg": "^3.1.5",
+    "vite": "^8.2.1",
+    "vitest": "^4.1.10"
+  }
+}
