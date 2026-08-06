@@ -14,11 +14,11 @@ describe("launch content", () => {
     expect(new Set(quizQuestions.map(({ id }) => id)).size).toBe(quizQuestions.length);
   });
 
-  it("keeps prelaunch products honest", () => {
+  it("keeps live products linked to their checkout pages", () => {
     for (const product of products) {
-      expect(product.availability).toBe("prelaunch");
-      expect(product.priceLabel).toContain("provisional");
-      expect(product.storeUrl).toMatch(/^https:\/\//);
+      expect(product.availability).toBe("live");
+      expect(product.priceLabel).toMatch(/^\$\d+\.\d{2}$/);
+      expect(product.productUrl).toMatch(/^https:\/\/shop\.spiritof1776\.store\/product\/\d+$/);
     }
   });
 });

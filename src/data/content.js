@@ -1,50 +1,50 @@
-export const STORE_URL = "https://the-spirit-of-1776.printify.me/";
+export const STORE_URL = "https://shop.spiritof1776.store/";
 
 export const products = [
   {
     id: "eagle-tee",
     name: "Spirit Eagle T-Shirt",
     category: "T-shirt",
-    priceLabel: "$29.99 provisional",
+    priceLabel: "$29.99",
     image: "/assets/products/eagle-tee-mockup.webp",
     imageAvif: "/assets/products/eagle-tee-mockup.avif",
     printFile: "/assets/products/eagle-tee-print.png",
     alt: "Charcoal T-shirt concept with a vintage eagle, shield, and Spirit of 1776 lettering",
     description: "A four-color eagle-and-shield crest honoring 250 years of an unfinished American idea.",
-    productUrl: null,
+    productUrl: "https://shop.spiritof1776.store/product/30706124",
     storeUrl: STORE_URL,
     analyticsLabel: "eagle_tee",
-    availability: "prelaunch"
+    availability: "live"
   },
   {
     id: "fife-drum-crewneck",
     name: "History in Motion Crewneck",
     category: "Crewneck sweatshirt",
-    priceLabel: "$49.99 provisional",
+    priceLabel: "$49.99",
     image: "/assets/products/fife-drum-crewneck-mockup.webp",
     imageAvif: "/assets/products/fife-drum-crewneck-mockup.avif",
     printFile: "/assets/products/fife-drum-crewneck-print.png",
     alt: "Navy crewneck concept with a fifer, two drummers, and History in Motion lettering",
     description: "A period-inspired fife-and-drum illustration built for cool evenings and curious conversations.",
-    productUrl: null,
+    productUrl: "https://shop.spiritof1776.store/product/30706127",
     storeUrl: STORE_URL,
     analyticsLabel: "fife_drum_crewneck",
-    availability: "prelaunch"
+    availability: "live"
   },
   {
     id: "flag-sticker",
     name: "One Enduring Idea Sticker",
     category: "Die-cut sticker",
-    priceLabel: "$5.99 provisional",
+    priceLabel: "$7.49",
     image: "/assets/products/flag-sticker-mockup.webp",
     imageAvif: "/assets/products/flag-sticker-mockup.avif",
     printFile: "/assets/products/spirit-flag-sticker-print.png",
     alt: "Distressed thirteen-star flag sticker reading Spirit of 1776 and One Enduring Idea",
     description: "A weathered thirteen-star flag badge for notebooks, bottles, and history kits.",
-    productUrl: null,
+    productUrl: "https://shop.spiritof1776.store/product/30706156",
     storeUrl: STORE_URL,
     analyticsLabel: "flag_sticker",
-    availability: "prelaunch"
+    availability: "live"
   }
 ];
 
