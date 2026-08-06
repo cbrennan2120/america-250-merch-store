@@ -49,7 +49,7 @@ body::before {
   position: fixed;
   z-index: 20;
 }
-img { display: block; max-width: 100%; }
+img { display: block; height: auto; max-width: 100%; }
 a { color: var(--red-700); text-underline-offset: .2em; }
 a:hover { text-decoration-thickness: .15em; }
 button, input { font: inherit; }
