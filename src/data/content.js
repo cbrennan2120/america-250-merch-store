@@ -72,11 +72,11 @@ export const stories = [
     ]
   },
   {
-    slug: "lived-revolution",
+    slug: "people",
     title: "Who Lived Through the Revolution?",
     eyebrow: "Many choices, many costs",
     summary: "Women, Black Americans, Native nations, loyalists, laborers, and families experienced the war in sharply different ways.",
-    href: "/stories/lived-revolution/",
+    href: "/stories/people/",
     sources: [
       "https://www.loc.gov/classroom-materials/united-states-history-primary-source-timeline/american-revolution-1763-1783/revolutionary-war-home-front/",
       "https://www.loc.gov/classroom-materials/american-revolution/"

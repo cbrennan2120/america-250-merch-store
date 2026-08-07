@@ -11,7 +11,7 @@ export default defineConfig({
         stories: page("stories/index.html"),
         declaration: page("stories/declaration/index.html"),
         libertyBell: page("stories/liberty-bell/index.html"),
-        livedRevolution: page("stories/lived-revolution/index.html"),
+        people: page("stories/people/index.html"),
         timeline: page("timeline/index.html"),
         quiz: page("quiz/index.html"),
         shop: page("shop/index.html"),

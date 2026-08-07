@@ -16,7 +16,7 @@ export default defineConfig({
     { name: "large-desktop-chromium", use: { viewport: { width: 1600, height: 1000 } } }
   ],
   webServer: {
-    command: "npm.cmd run dev -- --host 127.0.0.1 --port 4399",
+    command: "npm run dev -- --host 127.0.0.1 --port 4399",
     url: "http://127.0.0.1:4399",
     reuseExistingServer: false
   }

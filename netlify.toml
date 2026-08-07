@@ -27,8 +27,18 @@
   status = 301
 
 [[redirects]]
+  from = "/stories/people"
+  to = "/stories/people/"
+  status = 301
+
+[[redirects]]
   from = "/stories/lived-revolution"
-  to = "/stories/lived-revolution/"
+  to = "/stories/people/"
+  status = 301
+
+[[redirects]]
+  from = "/stories/lived-revolution/"
+  to = "/stories/people/"
   status = 301
 
 [[redirects]]
