@@ -5,7 +5,7 @@ import { dirname, resolve } from "node:path";
 const root = resolve(import.meta.dirname, "..");
 const htmlFiles = [
   "index.html", "404.html", "stories/index.html", "stories/declaration/index.html", "stories/liberty-bell/index.html",
-  "stories/lived-revolution/index.html", "timeline/index.html", "quiz/index.html", "shop/index.html", "about/index.html", "privacy/index.html"
+  "stories/people/index.html", "timeline/index.html", "quiz/index.html", "shop/index.html", "about/index.html", "privacy/index.html"
 ];
 const errors = [];
 
