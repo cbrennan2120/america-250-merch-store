@@ -62,7 +62,39 @@ test("the branded not-found page offers recovery navigation", async ({ page }) =
   await expect(page.getByRole("link", { name: "Return home" })).toBeVisible();
 });
 
-for (const route of ["/", "/stories/declaration/", "/quiz/", "/shop/"]) {
+const previewRoutes = [
+  "/new/declaration-of-independence/",
+  "/new/lexington-and-concord/",
+  "/new/washington-surrenders-command/",
+  "/new/bill-of-rights/",
+  "/new/underground-railroad/",
+  "/new/union-soldiers-and-emancipation/",
+  "/new/womens-suffrage/",
+  "/new/d-day-and-the-fight-against-fascism/",
+  "/new/civil-rights-movement/",
+  "/new/watergate-accountability/"
+];
+
+test("the experimental story laboratory links ten complete and distinct presentations", async ({ page }) => {
+  await page.goto("/new/");
+  await expect(page.locator(".story-card")).toHaveCount(10);
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex, nofollow");
+
+  const themes = new Set();
+  for (const route of previewRoutes) {
+    await page.goto(route);
+    await expect(page.locator(".story-chapter")).toHaveCount(5);
+    await expect(page.locator(".story-chapter__figure")).toHaveCount(4);
+    await expect(page.locator(".merch-card")).toHaveCount(3);
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex, nofollow");
+    themes.add(await page.locator("body").getAttribute("class"));
+    const hasHorizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+    expect(hasHorizontalOverflow).toBe(false);
+  }
+  expect(themes.size).toBe(10);
+});
+
+for (const route of ["/", "/stories/declaration/", "/quiz/", "/shop/", "/new/", "/new/declaration-of-independence/"]) {
   test(`has no serious accessibility violations at ${route}`, async ({ page }) => {
     await page.goto(route);
     const results = await new AxeBuilder({ page }).analyze();
