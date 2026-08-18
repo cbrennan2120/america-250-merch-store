@@ -17,6 +17,17 @@ export default defineConfig({
         shop: page("shop/index.html"),
         about: page("about/index.html"),
         privacy: page("privacy/index.html"),
+        newPreview: page("new/index.html"),
+        newDeclaration: page("new/declaration-of-independence/index.html"),
+        newLexington: page("new/lexington-and-concord/index.html"),
+        newWashington: page("new/washington-surrenders-command/index.html"),
+        newBillOfRights: page("new/bill-of-rights/index.html"),
+        newUndergroundRailroad: page("new/underground-railroad/index.html"),
+        newUnionEmancipation: page("new/union-soldiers-and-emancipation/index.html"),
+        newWomensSuffrage: page("new/womens-suffrage/index.html"),
+        newDDay: page("new/d-day-and-the-fight-against-fascism/index.html"),
+        newCivilRights: page("new/civil-rights-movement/index.html"),
+        newWatergate: page("new/watergate-accountability/index.html"),
         notFound: page("404.html")
       }
     }

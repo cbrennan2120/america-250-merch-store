@@ -66,6 +66,11 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
+[[headers]]
+  for = "/new/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
 [[context.deploy-preview.headers]]
   for = "/*"
   [context.deploy-preview.headers.values]

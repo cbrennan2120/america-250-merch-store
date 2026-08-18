@@ -5,7 +5,12 @@ import { dirname, resolve } from "node:path";
 const root = resolve(import.meta.dirname, "..");
 const htmlFiles = [
   "index.html", "404.html", "stories/index.html", "stories/declaration/index.html", "stories/liberty-bell/index.html",
-  "stories/people/index.html", "timeline/index.html", "quiz/index.html", "shop/index.html", "about/index.html", "privacy/index.html"
+  "stories/people/index.html", "timeline/index.html", "quiz/index.html", "shop/index.html", "about/index.html", "privacy/index.html",
+  "new/index.html", "new/declaration-of-independence/index.html", "new/lexington-and-concord/index.html",
+  "new/washington-surrenders-command/index.html", "new/bill-of-rights/index.html", "new/underground-railroad/index.html",
+  "new/union-soldiers-and-emancipation/index.html", "new/womens-suffrage/index.html",
+  "new/d-day-and-the-fight-against-fascism/index.html", "new/civil-rights-movement/index.html",
+  "new/watergate-accountability/index.html"
 ];
 const errors = [];
 
