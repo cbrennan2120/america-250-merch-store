@@ -5,9 +5,10 @@ test("homepage renders the complete launch structure without console errors", as
   const errors = [];
   page.on("console", (message) => { if (message.type() === "error") errors.push(message.text()); });
   await page.goto("/");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Freedom is a story");
-  await expect(page.locator(".product-card")).toHaveCount(3);
-  await expect(page.getByRole("link", { name: "Read the stories" })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Big history.Tiny heroes.");
+  await expect(page.locator(".product-card")).toHaveCount(6);
+  await expect(page.getByRole("link", { name: "Explore 10 stories" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Shop chibi goods" })).toBeVisible();
   expect(errors).toEqual([]);
   if (process.env.CAPTURE_QA) {
     await page.screenshot({ path: `test-results/home-${testInfo.project.name}.png`, fullPage: true });
@@ -28,7 +29,7 @@ test("quiz can be completed, explained, shared, and retried", async ({ page }) =
   await page.goto("/quiz/");
   const questions = page.locator(".quiz-question");
   await expect(questions).toHaveCount(10);
-  const correct = [0, 1, 1, 1, 2, 0, 1, 2, 2, 0];
+  const correct = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   for (let index = 0; index < correct.length; index += 1) {
     await questions.nth(index).locator("input").nth(correct[index]).check();
   }
@@ -41,13 +42,16 @@ test("quiz can be completed, explained, shared, and retried", async ({ page }) =
 
 test("live products link to their product-specific Printify pages", async ({ page }) => {
   await page.goto("/shop/");
-  await expect(page.locator(".product-card")).toHaveCount(3);
-  await expect(page.getByText("Available now")).toHaveCount(3);
+  await expect(page.locator(".product-card")).toHaveCount(6);
+  await expect(page.getByText("Available now")).toHaveCount(6);
   const links = page.locator("[data-product-link]");
-  await expect(links).toHaveCount(3);
-  await expect(links.nth(0)).toHaveAttribute("href", "https://shop.spiritof1776.store/product/30706124");
-  await expect(links.nth(1)).toHaveAttribute("href", "https://shop.spiritof1776.store/product/30706127");
-  await expect(links.nth(2)).toHaveAttribute("href", "https://shop.spiritof1776.store/product/30706156");
+  await expect(links).toHaveCount(6);
+  await expect(links.nth(0)).toHaveAttribute("href", "https://shop.spiritof1776.store/product/31839516");
+  await expect(links.nth(1)).toHaveAttribute("href", "https://shop.spiritof1776.store/product/31839757");
+  await expect(links.nth(2)).toHaveAttribute("href", "https://shop.spiritof1776.store/product/31839649");
+  await expect(links.nth(3)).toHaveAttribute("href", "https://shop.spiritof1776.store/product/31839795");
+  await expect(links.nth(4)).toHaveAttribute("href", "https://shop.spiritof1776.store/product/31845608");
+  await expect(links.nth(5)).toHaveAttribute("href", "https://shop.spiritof1776.store/product/31839925");
 });
 
 test("analytics stays unloaded on an unapproved local hostname", async ({ page }) => {
@@ -62,31 +66,29 @@ test("the branded not-found page offers recovery navigation", async ({ page }) =
   await expect(page.getByRole("link", { name: "Return home" })).toBeVisible();
 });
 
-const previewRoutes = [
-  "/new/declaration-of-independence/",
-  "/new/lexington-and-concord/",
-  "/new/washington-surrenders-command/",
-  "/new/bill-of-rights/",
-  "/new/underground-railroad/",
-  "/new/union-soldiers-and-emancipation/",
-  "/new/womens-suffrage/",
-  "/new/d-day-and-the-fight-against-fascism/",
-  "/new/civil-rights-movement/",
-  "/new/watergate-accountability/"
+const storyRoutes = [
+  "/stories/declaration-of-independence/",
+  "/stories/lexington-and-concord/",
+  "/stories/washington-surrenders-command/",
+  "/stories/bill-of-rights/",
+  "/stories/underground-railroad/",
+  "/stories/union-soldiers-and-emancipation/",
+  "/stories/womens-suffrage/",
+  "/stories/d-day-and-the-fight-against-fascism/",
+  "/stories/civil-rights-movement/",
+  "/stories/watergate-accountability/"
 ];
 
-test("the experimental story laboratory links ten complete and distinct presentations", async ({ page }) => {
-  await page.goto("/new/");
+test("the permanent story hub links ten complete illustrated stories", async ({ page }) => {
+  await page.goto("/stories/");
   await expect(page.locator(".story-card")).toHaveCount(10);
-  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex, nofollow");
 
   const themes = new Set();
-  for (const route of previewRoutes) {
+  for (const route of storyRoutes) {
     await page.goto(route);
     await expect(page.locator(".story-chapter")).toHaveCount(5);
     await expect(page.locator(".story-chapter__figure")).toHaveCount(4);
-    await expect(page.locator(".merch-card")).toHaveCount(3);
-    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex, nofollow");
+    await expect(page.locator(".source-drawer")).toHaveCount(1);
     themes.add(await page.locator("body").getAttribute("class"));
     const hasHorizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
     expect(hasHorizontalOverflow).toBe(false);
@@ -94,7 +96,7 @@ test("the experimental story laboratory links ten complete and distinct presenta
   expect(themes.size).toBe(10);
 });
 
-for (const route of ["/", "/stories/declaration/", "/quiz/", "/shop/", "/new/", "/new/declaration-of-independence/"]) {
+for (const route of ["/", "/stories/declaration-of-independence/", "/quiz/", "/shop/", "/stories/", "/stories/lexington-and-concord/"]) {
   test(`has no serious accessibility violations at ${route}`, async ({ page }) => {
     await page.goto(route);
     const results = await new AxeBuilder({ page }).analyze();

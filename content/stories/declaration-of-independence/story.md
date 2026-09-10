@@ -1,0 +1,85 @@
+# The Declaration of Independence
+
+## Who Gives Government Its Power?
+
+### The scene everyone remembers
+
+Picture a grand room in Philadelphia. Thomas Jefferson stands beside a finished parchment. John Hancock bends over the page. Fifty-five other delegates wait to add their names while everyone somehow holds still for history.
+
+It is a powerful picture—and not what happened on July 4, 1776.
+
+The Declaration came to life through a sequence of arguments, edits, votes, printing, and public readings. In June, Congress appointed five delegates to prepare a statement explaining why the colonies should separate from Great Britain. Jefferson wrote the first draft, then John Adams and Benjamin Franklin suggested changes. Congress debated and revised their work.
+
+On July 2, twelve colonial delegations voted for independence; New York did not yet vote. On July 4, Congress adopted the Declaration that explained the decision. That night, Philadelphia printer John Dunlap began turning the approved words into broadsides—large sheets that could travel quickly. The famous parchment was prepared later. Most delegates signed that version on August 2, and some signed afterward.
+
+The familiar all-at-once signing scene is therefore a symbol, not a snapshot. The real story is more interesting. Independence was not created by one dramatic stroke of a pen. It was argued over, decided, printed, carried, read aloud, and eventually signed.
+
+That slower sequence also shows how an idea becomes public. Inside Congress, delegates could still revise sentences and count votes. Once Dunlap’s sheets left the shop, the argument entered army camps, town meetings, newspapers, and public squares. Listeners did not need to stand inside the assembly room to encounter the claim being made in their name. The Declaration became more than Congress’s manuscript because printing invited ordinary people to hear it, judge it, celebrate it, question it, and eventually use its principles for purposes the delegates had not imagined.
+
+![Thomas Jefferson writes at a crowded wooden desk while John Adams gestures energetically and Benjamin Franklin reviews a draft through round spectacles in a warm eighteenth-century room.](01-drafting-the-idea.png)
+
+*Drafting the Idea — Jefferson prepared the draft; Adams and Franklin reviewed it before the Committee of Five presented it to Congress. Illustration: original AI-assisted chibi artwork created for Spirit of 1776.*
+
+### Rights before rulers
+
+The Declaration announced independence, but its boldest idea appears before its list of complaints against the king. People have rights that no government created and no ruler may rightfully take away. The document names “Life, Liberty and the pursuit of Happiness.”
+
+Think of those rights as belonging to a person simply because that person is human. A king does not hand them out like prizes. A legislature does not manufacture them. Government may recognize rights, protect them, or violate them, but it is not their original owner.
+
+This was the language of natural rights. The idea was not invented in Philadelphia, and the authors did not agree on every possible meaning. Yet placing it in a public declaration changed the argument. The colonists were not merely saying that one government had made a few bad choices. They were offering a standard by which any government could be judged: does it protect the rights people already possess?
+
+That question reaches beyond 1776. It asks us to look not only at laws and officials, but at the purpose beneath them.
+
+![Chibi delegates gather around green-covered tables in the Pennsylvania State House, listening, objecting, and debating a draft placed at the center of the room.](02-congress-debates.png)
+
+*Congress Debates — Congress revised the draft through July 3 and into July 4 before adopting it. This is a debate scene, not the later parchment signing. Illustration: original AI-assisted chibi artwork created for Spirit of 1776.*
+
+### Power on loan
+
+If government does not give people their basic rights, where does government get its authority? The Declaration answers with another compact phrase: “the consent of the governed.”
+
+In plain language, public power is on loan.
+
+Officials may exercise authority because people authorize a government to protect their rights and serve the public good. Power is a trust, not a ruler’s private property. That does not mean every person agrees with every law, or that government disappears whenever someone loses an argument. The Declaration itself warns that long-established governments should not be changed for minor or temporary reasons.
+
+But it also rejects the idea that people exist for the convenience of rulers. When a government persistently destroys the purposes for which it was formed, the people retain the right to alter it or replace it. That was the colonists’ case against British rule, followed by a long list of alleged abuses offered as evidence to the world.
+
+The argument carried a responsibility as well as a right. If authority comes from the people, citizens must debate, judge evidence, build institutions, and hold leaders accountable. Self-government is not simply freedom from control. It is the difficult work of governing together.
+
+![Workers in John Dunlap’s candlelit print shop set metal type, ink an eighteenth-century press, pull its lever, and stack fresh blank-looking broadsides as predawn light appears.](03-declaration-goes-to-press.png)
+
+*The Declaration Goes to Press — Congress directed the Committee of Five to supervise printing. Dunlap’s shop produced the first broadsides during the night of July 4; copies began traveling on July 5. Illustration: original AI-assisted chibi artwork created for Spirit of 1776.*
+
+### A promise larger than its authors
+
+The Declaration’s universal words collided with the world of 1776. Enslaved people were treated as property. Women had little formal political power. Native nations were described unfairly in the Declaration itself and faced expanding settlement and war. Voting was generally controlled by the states and commonly restricted by sex, race, property, religion, or some combination of them. The men declaring equality did not build an equal political community.
+
+That contradiction cannot be brushed aside. Jefferson enslaved human beings. Many other leaders and colonists benefited from slavery. Independence did not end it, grant women equal citizenship, respect Native sovereignty, or create universal voting rights.
+
+Yet the Declaration placed a sweeping promise in public view. People excluded from its authors’ political “we” could read its principles, compare them with American life, and demand an answer.
+
+One person who heard those words was James Forten, a nine-year-old Black Philadelphian present at the July 8 public reading in the State House Yard. He later became a successful sailmaker and a leading abolitionist. Across generations, abolitionists, women’s-rights advocates, civil-rights leaders, workers, and others used the Declaration’s claims as tools. They did not need to pretend the founding had fulfilled equality. They could insist that the country live up to the standard it had announced.
+
+The promise became larger than the people who first wrote it because its logic could be turned against exclusion. “All” could not honestly mean only the powerful forever.
+
+![Colonel John Nixon reads from a broadside outside the Pennsylvania State House while a varied crowd of women, children, laborers, tradespeople, Black Philadelphians, and soldiers listens with hope and uncertainty.](04-words-meet-the-people.png)
+
+*The Words Meet the People — Nixon publicly read the Declaration in the State House Yard on July 8. Nine-year-old James Forten later recalled being present. The varied crowd is an interpretive reconstruction, not a portrait of identified attendees. Illustration: original AI-assisted chibi artwork created for Spirit of 1776.*
+
+### Why this is the Spirit of 1776
+
+The Spirit of 1776 is not nostalgia for powdered wigs or a claim that the founders solved freedom once and for all. It is a demanding principle: government exists to protect human rights, receives its just authority from the people, and must answer to them when it betrays that purpose.
+
+That spirit includes courage—the courage to resist coercive power. It also includes humility, because every generation must ask who remains outside the promise. And it includes responsibility, because consent requires more than cheering from the crowd. It requires participation, argument, listening, lawful accountability, and the steady repair of institutions.
+
+The Declaration did two things at once. It announced that thirteen colonies claimed independence, and it gave the world a test for political legitimacy. The first act belongs to 1776. The test still belongs to us.
+
+## Source credits and editorial notes
+
+- [Declaration of Independence: A Transcription — National Archives](https://www.archives.gov/founding-docs/declaration-transcript): exact wording of the Declaration, including natural rights, consent, prudence, and the right to alter or abolish destructive government.
+- [The Declaration of Independence: A History — National Archives](https://www.archives.gov/founding-docs/declaration-history): Committee of Five, drafting and revision, July 2 vote, July 4 adoption, Dunlap printing, engrossment, and signing chronology.
+- [Declaration of Independence (1776), Milestone Documents — National Archives](https://www.archives.gov/milestone-documents/declaration-of-independence): document overview, historical context, and educational record.
+- [Declaration of Independence Timeline — National Park Service](https://www.nps.gov/inde/learn/historyculture/resources-declarationofindependence.htm): July 8 public reading by Colonel John Nixon in the State House Yard.
+- [James Forten and the Dunlap Broadside — National Park Service](https://www.nps.gov/articles/000/inde-jforten-dunlap-broadside-declaration-1776.htm): Forten’s presence at the public reading and his later use of the Declaration’s principles in antislavery advocacy.
+
+Direct quotations are from the National Archives transcription. The illustrations are educational interpretations, not eyewitness records. Clothing, rooms, occupations, and the public crowd are historically inspired; exact arrangements and expressions are imaginative reconstructions. No official America250 marks or organizational affiliation are used or implied.
