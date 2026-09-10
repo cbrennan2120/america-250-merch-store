@@ -5,9 +5,10 @@ test("homepage renders the complete launch structure without console errors", as
   const errors = [];
   page.on("console", (message) => { if (message.type() === "error") errors.push(message.text()); });
   await page.goto("/");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("History gets cuter");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Big history.Tiny heroes.");
   await expect(page.locator(".product-card")).toHaveCount(6);
-  await expect(page.getByRole("link", { name: "Read the stories" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Explore 10 stories" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Shop chibi goods" })).toBeVisible();
   expect(errors).toEqual([]);
   if (process.env.CAPTURE_QA) {
     await page.screenshot({ path: `test-results/home-${testInfo.project.name}.png`, fullPage: true });
