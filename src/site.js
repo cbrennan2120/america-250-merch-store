@@ -7,12 +7,15 @@ function productCard(product) {
   const target = product.productUrl || product.storeUrl;
   const status = "Available now";
   const action = "View product";
-  return `
-    <article class="product-card" id="${product.id}">
-      <picture>
+  const imageMarkup = product.imageAvif
+    ? `<picture>
         <source srcset="${product.imageAvif}" type="image/avif">
         <img src="${product.image}" alt="${product.alt}" width="1200" height="1000" loading="lazy">
-      </picture>
+      </picture>`
+    : `<img src="${product.image}" alt="${product.alt}" width="1200" height="1000" loading="lazy">`;
+  return `
+    <article class="product-card" id="${product.id}">
+      ${imageMarkup}
       <div class="product-card__body">
         <p class="eyebrow">${product.category}</p>
         <h3>${product.name}</h3>

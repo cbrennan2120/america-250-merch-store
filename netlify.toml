@@ -18,27 +18,57 @@
 
 [[redirects]]
   from = "/stories/declaration"
-  to = "/stories/declaration/"
+  to = "/stories/declaration-of-independence/"
+  status = 301
+
+[[redirects]]
+  from = "/stories/declaration/"
+  to = "/stories/declaration-of-independence/"
   status = 301
 
 [[redirects]]
   from = "/stories/liberty-bell"
-  to = "/stories/liberty-bell/"
+  to = "/stories/"
+  status = 301
+
+[[redirects]]
+  from = "/stories/liberty-bell/"
+  to = "/stories/"
   status = 301
 
 [[redirects]]
   from = "/stories/people"
-  to = "/stories/people/"
+  to = "/stories/"
+  status = 301
+
+[[redirects]]
+  from = "/stories/people/"
+  to = "/stories/"
   status = 301
 
 [[redirects]]
   from = "/stories/lived-revolution"
-  to = "/stories/people/"
+  to = "/stories/"
   status = 301
 
 [[redirects]]
   from = "/stories/lived-revolution/"
-  to = "/stories/people/"
+  to = "/stories/"
+  status = 301
+
+[[redirects]]
+  from = "/new"
+  to = "/stories/"
+  status = 301
+
+[[redirects]]
+  from = "/new/"
+  to = "/stories/"
+  status = 301
+
+[[redirects]]
+  from = "/new/:slug/"
+  to = "/stories/:slug/"
   status = 301
 
 [[redirects]]

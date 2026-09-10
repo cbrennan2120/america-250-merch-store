@@ -11,21 +11,30 @@ function addSchema(value) {
 
 export function injectStructuredData() {
   const pathname = window.location.pathname;
+  const creator = { "@id": "https://chrisbrennan.net/#person" };
   const base = [
+    {
+      "@type": "Person",
+      "@id": creator["@id"],
+      name: "Chris Brennan",
+      url: "https://chrisbrennan.net/"
+    },
     {
       "@type": "Organization",
       "@id": `${origin}/#organization`,
       name: "Spirit of 1776",
       url: `${origin}/`,
       logo: `${origin}/assets/brand/favicon-512.png`,
-      description: "Independent American-history education and merchandise project."
+      description: "Independent American-history education and merchandise project.",
+      founder: creator
     },
     {
       "@type": "WebSite",
       "@id": `${origin}/#website`,
       url: `${origin}/`,
       name: "Spirit of 1776",
-      publisher: { "@id": `${origin}/#organization` }
+      publisher: { "@id": `${origin}/#organization` },
+      creator
     }
   ];
 
@@ -37,6 +46,7 @@ export function injectStructuredData() {
       headline: story.title,
       description: story.summary,
       mainEntityOfPage: `${origin}${story.href}`,
+      author: creator,
       publisher: { "@id": `${origin}/#organization` },
       datePublished: "2026-08-06",
       dateModified: "2026-08-06",
@@ -56,7 +66,7 @@ export function injectStructuredData() {
         "@type": "Offer",
         priceCurrency: "USD",
         price: product.priceLabel.replace(/[^0-9.]/g, ""),
-        availability: "https://schema.org/PreOrder",
+        availability: "https://schema.org/InStock",
         url: product.productUrl || product.storeUrl
       }
     }));

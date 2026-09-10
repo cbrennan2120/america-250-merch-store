@@ -3,9 +3,9 @@ import { products, quizQuestions, stories, timeline } from "../src/data/content.
 
 describe("launch content", () => {
   it("keeps the approved launch counts", () => {
-    expect(products).toHaveLength(3);
-    expect(stories).toHaveLength(3);
-    expect(timeline).toHaveLength(8);
+    expect(products).toHaveLength(6);
+    expect(stories).toHaveLength(10);
+    expect(timeline).toHaveLength(10);
     expect(quizQuestions).toHaveLength(10);
   });
 

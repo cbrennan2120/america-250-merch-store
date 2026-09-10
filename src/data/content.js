@@ -1,179 +1,195 @@
+import { stories as storyManifest } from "./story-manifest.js";
+
 export const STORE_URL = "https://shop.spiritof1776.store/";
 
 export const products = [
   {
-    id: "eagle-tee",
-    name: "Spirit Eagle T-Shirt",
-    category: "T-shirt",
+    id: "currently-revolting-tee",
+    name: "Currently Revolting Chibi Patriot T-Shirt",
+    category: "Apparel",
     priceLabel: "$29.99",
-    image: "/assets/products/eagle-tee-mockup.webp",
-    imageAvif: "/assets/products/eagle-tee-mockup.avif",
-    printFile: "/assets/products/eagle-tee-print.png",
-    alt: "Charcoal T-shirt concept with a vintage eagle, shield, and Spirit of 1776 lettering",
-    description: "A four-color eagle-and-shield crest honoring 250 years of an unfinished American idea.",
-    productUrl: "https://shop.spiritof1776.store/product/30706124",
+    image: "/assets/products/currently-revolting-tee.webp",
+    alt: "Sticker-style chibi colonial patriot kicking over a tea crate with flying leaves",
+    description: "A furious-but-cute Revolutionary-era patriot for readers who like their history with a little comic spark.",
+    productUrl: "https://shop.spiritof1776.store/product/31839516",
     storeUrl: STORE_URL,
-    analyticsLabel: "eagle_tee",
-    availability: "live"
+    analyticsLabel: "currently_revolting_tee",
+    availability: "live",
+    relatedStorySlugs: ["lexington-and-concord", "declaration-of-independence"]
   },
   {
-    id: "fife-drum-crewneck",
-    name: "History in Motion Crewneck",
-    category: "Crewneck sweatshirt",
-    priceLabel: "$49.99",
-    image: "/assets/products/fife-drum-crewneck-mockup.webp",
-    imageAvif: "/assets/products/fife-drum-crewneck-mockup.avif",
-    printFile: "/assets/products/fife-drum-crewneck-print.png",
-    alt: "Navy crewneck concept with a fifer, two drummers, and History in Motion lettering",
-    description: "A period-inspired fife-and-drum illustration built for cool evenings and curious conversations.",
-    productUrl: "https://shop.spiritof1776.store/product/30706127",
-    storeUrl: STORE_URL,
-    analyticsLabel: "fife_drum_crewneck",
-    availability: "live"
-  },
-  {
-    id: "flag-sticker",
-    name: "One Enduring Idea Sticker",
-    category: "Die-cut sticker",
+    id: "currently-revolting-sticker",
+    name: "Currently Revolting Chibi Patriot Sticker",
+    category: "Stickers",
     priceLabel: "$7.49",
-    image: "/assets/products/flag-sticker-mockup.webp",
-    imageAvif: "/assets/products/flag-sticker-mockup.avif",
-    printFile: "/assets/products/spirit-flag-sticker-print.png",
-    alt: "Distressed thirteen-star flag sticker reading Spirit of 1776 and One Enduring Idea",
-    description: "A weathered thirteen-star flag badge for notebooks, bottles, and history kits.",
-    productUrl: "https://shop.spiritof1776.store/product/30706156",
+    image: "/assets/products/currently-revolting-sticker.webp",
+    alt: "Die-cut chibi colonial patriot kicking over a wooden tea crate",
+    description: "A bold die-cut sticker version of the tea-crate tantrum, made for notebooks, bottles, and history kits.",
+    productUrl: "https://shop.spiritof1776.store/product/31839757",
     storeUrl: STORE_URL,
-    analyticsLabel: "flag_sticker",
-    availability: "live"
+    analyticsLabel: "currently_revolting_sticker",
+    availability: "live",
+    relatedStorySlugs: ["lexington-and-concord", "declaration-of-independence"]
+  },
+  {
+    id: "give-me-a-minute-crewneck",
+    name: "Give Me a Minute Chibi Minuteman Crewneck",
+    category: "Apparel",
+    priceLabel: "$49.99",
+    image: "/assets/products/give-me-a-minute-crewneck.webp",
+    alt: "Frazzled chibi minuteman half dressed with one boot missing and a crooked tricorn hat",
+    description: "A soft crewneck built around the most relatable militia moment: not quite ready, but still showing up.",
+    productUrl: "https://shop.spiritof1776.store/product/31839649",
+    storeUrl: STORE_URL,
+    analyticsLabel: "give_me_a_minute_crewneck",
+    availability: "live",
+    relatedStorySlugs: ["lexington-and-concord"]
+  },
+  {
+    id: "give-me-a-minute-sticker",
+    name: "Give Me a Minute Chibi Minuteman Sticker",
+    category: "Stickers",
+    priceLabel: "$7.49",
+    image: "/assets/products/give-me-a-minute-sticker.webp",
+    alt: "Panicked chibi minuteman with one boot on, one boot missing, and a musket under his arm",
+    description: "A compact sticker for anyone who has ever been called to action before finishing breakfast.",
+    productUrl: "https://shop.spiritof1776.store/product/31839795",
+    storeUrl: STORE_URL,
+    analyticsLabel: "give_me_a_minute_sticker",
+    availability: "live",
+    relatedStorySlugs: ["lexington-and-concord"]
+  },
+  {
+    id: "liber-tea-mug",
+    name: "Liber-Tea Chibi Patriot Mug",
+    category: "Mugs",
+    priceLabel: "$19.99",
+    image: "/assets/products/liber-tea-mug.webp",
+    alt: "Horizontal mug artwork with cheerful chibi patriot raising an oversized steaming teacup",
+    description: "A bright white mug for tea, coffee, and very serious puns about self-government.",
+    productUrl: "https://shop.spiritof1776.store/product/31845608",
+    storeUrl: STORE_URL,
+    analyticsLabel: "liber_tea_mug",
+    availability: "live",
+    relatedStorySlugs: ["declaration-of-independence"]
+  },
+  {
+    id: "liber-tea-sticker",
+    name: "Liber-Tea Chibi Patriot Sticker",
+    category: "Stickers",
+    priceLabel: "$7.49",
+    image: "/assets/products/liber-tea-sticker.webp",
+    alt: "Cheerful chibi patriot lifting an oversized steaming teacup with broken tea crates nearby",
+    description: "A playful die-cut sticker for history fans who appreciate a well-timed tea joke.",
+    productUrl: "https://shop.spiritof1776.store/product/31839925",
+    storeUrl: STORE_URL,
+    analyticsLabel: "liber_tea_sticker",
+    availability: "live",
+    relatedStorySlugs: ["declaration-of-independence"]
   }
 ];
 
-export const stories = [
-  {
-    slug: "declaration",
-    title: "What Changed on July 4, 1776?",
-    eyebrow: "A document becomes a decision",
-    summary: "Independence was debated, adopted, printed, and carried outward—not completed in a single dramatic signing.",
-    href: "/stories/declaration/",
-    sources: [
-      "https://www.archives.gov/milestone-documents/declaration-of-independence",
-      "https://www.archives.gov/founding-docs/declaration-history"
-    ]
-  },
-  {
-    slug: "liberty-bell",
-    title: "Symbols, Myths, and the Liberty Bell",
-    eyebrow: "A working bell becomes an argument",
-    summary: "The bell's most familiar stories grew over time, as new generations gave its inscription new meaning.",
-    href: "/stories/liberty-bell/",
-    sources: [
-      "https://www.nps.gov/inde/learn/historyculture/stories-libertybell.htm",
-      "https://www.nps.gov/inde/faqs.htm"
-    ]
-  },
-  {
-    slug: "people",
-    title: "Who Lived Through the Revolution?",
-    eyebrow: "Many choices, many costs",
-    summary: "Women, Black Americans, Native nations, loyalists, laborers, and families experienced the war in sharply different ways.",
-    href: "/stories/people/",
-    sources: [
-      "https://www.loc.gov/classroom-materials/united-states-history-primary-source-timeline/american-revolution-1763-1783/revolutionary-war-home-front/",
-      "https://www.loc.gov/classroom-materials/american-revolution/"
-    ]
-  }
-];
+export const stories = storyManifest.map((story) => ({
+  slug: story.slug,
+  title: story.title,
+  eyebrow: story.era,
+  summary: story.summary,
+  href: story.href,
+  sources: story.sources ?? []
+}));
 
 export const timeline = [
-  { year: "1765", title: "The Stamp Act", text: "Parliament taxes printed materials, intensifying arguments over representation.", source: "https://www.loc.gov/classroom-materials/american-revolution/" },
-  { year: "1770", title: "The Boston Massacre", text: "British soldiers fire into a Boston crowd; competing accounts turn the event into powerful propaganda.", source: "https://www.loc.gov/classroom-materials/american-revolution/" },
-  { year: "1773", title: "The Boston Tea Party", text: "Protesters destroy East India Company tea, prompting a stronger British response.", source: "https://www.nps.gov/bost/learn/historyculture/boston-tea-party.htm" },
-  { year: "1775", title: "Lexington and Concord", text: "Fighting begins in Massachusetts on April 19, transforming political conflict into war.", source: "https://www.nps.gov/mima/learn/historyculture/the-battles-of-lexington-and-concord.htm" },
-  { year: "1776", title: "Independence declared", text: "Congress adopts the Declaration on July 4; the first printed copies begin circulating the next day.", source: "https://www.archives.gov/founding-docs/declaration-history" },
-  { year: "1777", title: "Saratoga", text: "An American victory helps convince France to enter the war as an ally.", source: "https://www.nps.gov/sara/learn/historyculture/the-battle-of-saratoga.htm" },
-  { year: "1781", title: "Yorktown", text: "A combined American and French campaign traps Cornwallis, ending the war's last major battle.", source: "https://www.nps.gov/york/learn/historyculture/siege-of-yorktown.htm" },
-  { year: "1783", title: "The Treaty of Paris", text: "The treaty formally ends the war and recognizes United States independence.", source: "https://www.archives.gov/milestone-documents/treaty-of-paris" }
+  { year: "1775", title: "Lexington and Concord", text: "Armed conflict begins after Massachusetts communities resist coercive searches and seizures.", source: "https://www.nps.gov/mima/learn/historyculture/the-battles-of-lexington-and-concord.htm" },
+  { year: "1776", title: "The Declaration of Independence", text: "Congress adopts a public argument for natural rights and government by consent.", source: "https://www.archives.gov/founding-docs/declaration-transcript" },
+  { year: "1783", title: "Washington surrenders command", text: "George Washington returns military authority to Congress, placing the army beneath civilian government.", source: "https://www.mountvernon.org/library/digitalhistory/digital-encyclopedia/article/resignation-of-military-commission" },
+  { year: "1791", title: "The Bill of Rights", text: "The first ten amendments become concrete limits on federal power.", source: "https://www.archives.gov/founding-docs/bill-of-rights" },
+  { year: "1830s-1865", title: "The Underground Railroad", text: "Freedom seekers and allies resist legalized human oppression through flight, aid, and direct action.", source: "https://www.nps.gov/subjects/undergroundrailroad/index.htm" },
+  { year: "1861-1865", title: "Union soldiers and emancipation", text: "The Civil War becomes a war to preserve the Union and destroy slavery.", source: "https://www.archives.gov/milestone-documents/emancipation-proclamation" },
+  { year: "1848-1920", title: "Women's suffrage", text: "Organizers force the nation to expand political self-government through the Nineteenth Amendment.", source: "https://www.archives.gov/milestone-documents/19th-amendment" },
+  { year: "1944", title: "D-Day and the fight against fascism", text: "Allied forces open a foothold in Normandy against Nazi occupation and totalitarian rule.", source: "https://www.nationalww2museum.org/war/topics/d-day-and-normandy-campaign" },
+  { year: "1954-1965", title: "The civil-rights movement", text: "Families, students, organizers, and marchers compel America to honor constitutional promises.", source: "https://www.archives.gov/milestone-documents/civil-rights-act" },
+  { year: "1972-1974", title: "Watergate accountability", text: "Investigators, courts, Congress, and the public demonstrate that no leader stands above the law.", source: "https://www.archives.gov/research/investigations/watergate" }
 ];
 
 export const quizQuestions = [
   {
-    id: "independence-vote",
-    prompt: "On which date did Congress adopt the resolution for independence?",
-    choices: ["July 2, 1776", "July 4, 1776", "August 2, 1776", "July 8, 1776"],
+    id: "lexington-why",
+    prompt: "What made Lexington and Concord fit the Spirit of 1776 theme?",
+    choices: ["Communities resisted coercive power", "It ended the war", "It created the Constitution", "It was fought overseas"],
     correctIndex: 0,
-    explanation: "Congress adopted the Lee Resolution on July 2. It adopted the Declaration's final text on July 4.",
-    source: "https://www.archives.gov/founding-docs/declaration-history"
+    explanation: "The battles grew from local resistance to British searches for arms and supplies.",
+    source: "https://www.nps.gov/mima/learn/historyculture/the-battles-of-lexington-and-concord.htm"
   },
   {
-    id: "declaration-adopted",
-    prompt: "What happened on July 4, 1776?",
-    choices: ["Every delegate signed the parchment", "Congress adopted the Declaration", "The war ended", "The Constitution took effect"],
-    correctIndex: 1,
-    explanation: "Congress adopted the Declaration on July 4; delegates began signing the engrossed parchment on August 2.",
-    source: "https://www.archives.gov/milestone-documents/declaration-of-independence"
-  },
-  {
-    id: "dunlap",
-    prompt: "Who printed the first broadside copies of the Declaration?",
-    choices: ["Benjamin Franklin", "John Dunlap", "Mary Katherine Goddard", "Paul Revere"],
-    correctIndex: 1,
-    explanation: "Congress sent the adopted text to printer John Dunlap on the night of July 4.",
-    source: "https://www.archives.gov/founding-docs/declaration-history"
-  },
-  {
-    id: "bell-name",
-    prompt: "What was the Liberty Bell originally called?",
-    choices: ["The Freedom Bell", "The State House Bell", "The Congress Bell", "The Philadelphia Bell"],
-    correctIndex: 1,
-    explanation: "It served Pennsylvania's State House and was known simply as the State House bell.",
-    source: "https://www.nps.gov/inde/learn/historyculture/stories-libertybell.htm"
-  },
-  {
-    id: "bell-crack",
-    prompt: "What do historians know for certain about the Liberty Bell's first crack?",
-    choices: ["It cracked on July 4", "A cannon blast caused it", "No exact date or cause is documented", "It arrived cracked from London"],
-    correctIndex: 2,
-    explanation: "There is no surviving record that establishes exactly when or why the famous crack began.",
-    source: "https://www.nps.gov/inde/faqs.htm"
-  },
-  {
-    id: "bell-symbol",
-    prompt: "Which movement helped popularize the name “Liberty Bell” in the 1830s?",
-    choices: ["Abolition", "Temperance", "Conservation", "Labor reform"],
+    id: "declaration-power",
+    prompt: "According to the Declaration, government gets just powers from what source?",
+    choices: ["The consent of the governed", "A king's permission", "Military rank", "Inherited property"],
     correctIndex: 0,
-    explanation: "Abolitionists embraced the bell's inscription and used the Liberty Bell name in antislavery publications.",
-    source: "https://www.nps.gov/inde/learn/historyculture/stories-libertybell.htm"
+    explanation: "The Declaration says governments derive just powers from the consent of the governed.",
+    source: "https://www.archives.gov/founding-docs/declaration-transcript"
   },
   {
-    id: "home-front",
-    prompt: "How did the war change many women's daily work?",
-    choices: ["It ended household production", "Many took on farms, businesses, and camp work", "Women were required to leave cities", "It guaranteed voting rights"],
-    correctIndex: 1,
-    explanation: "Women maintained farms and businesses and often performed essential cooking, laundry, and nursing work in army camps.",
-    source: "https://www.loc.gov/classroom-materials/united-states-history-primary-source-timeline/american-revolution-1763-1783/revolutionary-war-home-front/"
-  },
-  {
-    id: "native-nations",
-    prompt: "Did Native nations all choose the same side in the Revolution?",
-    choices: ["Yes, all supported Britain", "Yes, all supported independence", "No, choices differed and many tried neutrality", "Native nations were not involved"],
-    correctIndex: 2,
-    explanation: "Native nations made different strategic choices; many feared further colonial expansion, while others sought neutrality.",
-    source: "https://www.loc.gov/classroom-materials/united-states-history-primary-source-timeline/american-revolution-1763-1783/revolutionary-war-home-front/"
-  },
-  {
-    id: "african-americans",
-    prompt: "Which statement best describes Black Americans during the Revolution?",
-    choices: ["All served one side", "The war immediately ended slavery", "People pursued freedom through different paths on both sides", "Black Americans were barred from all military service"],
-    correctIndex: 2,
-    explanation: "Some sought freedom through British lines, some served in American forces, and many remained enslaved despite revolutionary language.",
-    source: "https://www.loc.gov/classroom-materials/united-states-history-primary-source-timeline/american-revolution-1763-1783/revolutionary-war-home-front/"
-  },
-  {
-    id: "peace",
-    prompt: "Which agreement formally ended the Revolutionary War?",
-    choices: ["Treaty of Paris, 1783", "Articles of Confederation", "Bill of Rights", "Jay Treaty"],
+    id: "washington-command",
+    prompt: "Why was Washington's resignation of command so important?",
+    choices: ["It showed civilian government over military rule", "It made him king", "It ended voting", "It canceled Congress"],
     correctIndex: 0,
-    explanation: "The 1783 Treaty of Paris ended the war and recognized United States independence.",
-    source: "https://www.archives.gov/milestone-documents/treaty-of-paris"
+    explanation: "Washington gave military power back to civilian authority rather than keeping it personally.",
+    source: "https://www.mountvernon.org/library/digitalhistory/digital-encyclopedia/article/resignation-of-military-commission"
+  },
+  {
+    id: "bill-of-rights",
+    prompt: "What is the Bill of Rights mainly designed to do?",
+    choices: ["Limit government power and protect liberties", "Create a national church", "Name a president", "End state governments"],
+    correctIndex: 0,
+    explanation: "The first ten amendments protect liberties by setting limits on federal power.",
+    source: "https://www.archives.gov/founding-docs/bill-of-rights"
+  },
+  {
+    id: "underground-railroad",
+    prompt: "What best describes the Underground Railroad?",
+    choices: ["Resistance to legalized slavery", "A single train line", "A federal agency", "A Civil War battlefield"],
+    correctIndex: 0,
+    explanation: "It was a network of people, routes, and places used by freedom seekers resisting slavery.",
+    source: "https://www.nps.gov/subjects/undergroundrailroad/index.htm"
+  },
+  {
+    id: "emancipation",
+    prompt: "How did emancipation change the Civil War's meaning?",
+    choices: ["It linked Union victory to destroying slavery", "It made slavery permanent", "It ended the war immediately", "It removed Black soldiers from the conflict"],
+    correctIndex: 0,
+    explanation: "Emancipation made freedom a central Union war aim and opened paths for Black military service.",
+    source: "https://www.archives.gov/milestone-documents/emancipation-proclamation"
+  },
+  {
+    id: "suffrage",
+    prompt: "What did the Nineteenth Amendment prohibit?",
+    choices: ["Denying the vote because of sex", "All voting taxes", "Presidential elections", "Women holding office"],
+    correctIndex: 0,
+    explanation: "The amendment prohibits denying citizens the right to vote on account of sex.",
+    source: "https://www.archives.gov/milestone-documents/19th-amendment"
+  },
+  {
+    id: "d-day",
+    prompt: "Why does D-Day belong in this broader liberty story?",
+    choices: ["It was a sacrifice against fascist totalitarian rule", "It was a tax protest", "It created the Bill of Rights", "It happened in 1776"],
+    correctIndex: 0,
+    explanation: "The Normandy landings opened a Western Allied front against Nazi occupation.",
+    source: "https://www.nationalww2museum.org/war/topics/d-day-and-normandy-campaign"
+  },
+  {
+    id: "civil-rights",
+    prompt: "What did the civil-rights movement force America to confront?",
+    choices: ["Whether founding promises applied equally", "Whether monarchy should return", "Whether independence should be repealed", "Whether newspapers should close"],
+    correctIndex: 0,
+    explanation: "The movement pressed the country to honor promises of equal protection, voting rights, and citizenship.",
+    source: "https://www.archives.gov/milestone-documents/civil-rights-act"
+  },
+  {
+    id: "watergate",
+    prompt: "What core principle did Watergate accountability demonstrate?",
+    choices: ["No leader stands above the law", "Presidents cannot be investigated", "Courts have no role", "Congress cannot ask questions"],
+    correctIndex: 0,
+    explanation: "The scandal tested whether legal accountability reached the presidency itself.",
+    source: "https://www.archives.gov/research/investigations/watergate"
   }
 ];
