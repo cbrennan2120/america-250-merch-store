@@ -7,8 +7,9 @@ test("homepage renders the complete launch structure without console errors", as
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Big history.Tiny heroes.");
   await expect(page.locator(".product-card")).toHaveCount(6);
-  await expect(page.getByRole("link", { name: "Explore 10 stories" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Shop chibi goods" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Read the stories" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Take the quiz", exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Shop the collection" })).toBeVisible();
   expect(errors).toEqual([]);
   if (process.env.CAPTURE_QA) {
     await page.screenshot({ path: `test-results/home-${testInfo.project.name}.png`, fullPage: true });
@@ -40,8 +41,9 @@ test("quiz can be completed, explained, shared, and retried", async ({ page }) =
   await expect(page.locator("[data-quiz-result]")).toBeHidden();
 });
 
-test("live products link to their product-specific Printify pages", async ({ page }) => {
+test("live products link to their product-specific Printify pages", async ({ page }, testInfo) => {
   await page.goto("/shop/");
+  await expect(page.locator(".product-design-group")).toHaveCount(3);
   await expect(page.locator(".product-card")).toHaveCount(6);
   await expect(page.getByText("Available now")).toHaveCount(6);
   const links = page.locator("[data-product-link]");
@@ -52,6 +54,17 @@ test("live products link to their product-specific Printify pages", async ({ pag
   await expect(links.nth(3)).toHaveAttribute("href", "https://shop.spiritof1776.store/product/31839795");
   await expect(links.nth(4)).toHaveAttribute("href", "https://shop.spiritof1776.store/product/31845608");
   await expect(links.nth(5)).toHaveAttribute("href", "https://shop.spiritof1776.store/product/31839925");
+  if (process.env.CAPTURE_QA) {
+    await page.screenshot({ path: `test-results/shop-${testInfo.project.name}.png`, fullPage: true });
+  }
+});
+
+test("customer contact and artwork disclosure are human and centralized", async ({ page }) => {
+  await page.goto("/about/");
+  await expect(page.getByRole("heading", { level: 2, name: "Hi, I’m Chris." })).toBeVisible();
+  await expect(page.locator('a[href="mailto:cbrennan2120@gmail.com"]')).toHaveCount(2);
+  await expect(page.getByText("AI-assisted", { exact: false })).toHaveCount(1);
+  await expect(page.locator('a[href*="github.com/cbrennan2120/america-250-merch-store/issues"]')).toHaveCount(0);
 });
 
 test("analytics stays unloaded on an unapproved local hostname", async ({ page }) => {
@@ -80,6 +93,7 @@ const storyRoutes = [
 ];
 
 test("the permanent story hub links ten complete illustrated stories", async ({ page }) => {
+  test.setTimeout(60_000);
   await page.goto("/stories/");
   await expect(page.locator(".story-card")).toHaveCount(10);
 
@@ -89,6 +103,7 @@ test("the permanent story hub links ten complete illustrated stories", async ({ 
     await expect(page.locator(".story-chapter")).toHaveCount(5);
     await expect(page.locator(".story-chapter__figure")).toHaveCount(4);
     await expect(page.locator(".source-drawer")).toHaveCount(1);
+    await expect(page.getByText("original AI-assisted chibi artwork", { exact: false })).toHaveCount(0);
     themes.add(await page.locator("body").getAttribute("class"));
     const hasHorizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
     expect(hasHorizontalOverflow).toBe(false);

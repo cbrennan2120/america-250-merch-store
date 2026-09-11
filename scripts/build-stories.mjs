@@ -25,6 +25,10 @@ function inlineMarkdown(value) {
   return escapeHtml(value).replace(/\[([^\]]+)]\((https?:\/\/[^)]+)\)/g, '<a href="$2" rel="noreferrer">$1</a>');
 }
 
+function presentationCaption(value) {
+  return inlineMarkdown(value.replace(/\s*Illustration:\s*original AI-assisted chibi artwork created for Spirit of 1776\.?\s*$/i, "").trim());
+}
+
 function paragraphs(markdown) {
   return markdown
     .trim()
@@ -97,8 +101,8 @@ function header() {
 
 function footer() {
   return `<footer class="site-footer">
-    <div class="shell footer-grid"><div><h2>Spirit of 1776</h2><p>Clear stories, original goods, and an invitation to keep asking better questions.</p></div><div><h2>Explore</h2><ul><li><a href="/stories/">Stories</a></li><li><a href="/timeline/">Timeline</a></li><li><a href="/quiz/">Quiz</a></li><li><a href="/shop/">Shop</a></li></ul></div><div><h2>Project</h2><ul><li><a href="/about/">About and sources</a></li><li><a href="/privacy/">Privacy choices</a></li><li><a href="https://github.com/cbrennan2120/america-250-merch-store/issues" target="_blank" rel="noopener">Contact and corrections</a></li></ul></div></div>
-    <div class="shell footer-note">© 2026 Spirit of 1776. Independent educational and merchandise project. Not affiliated with America250.</div>
+    <div class="shell footer-grid"><div><h2>Spirit of 1776</h2><p>An independent history project created by Chris Brennan.</p></div><div><h2>Explore</h2><ul><li><a href="/stories/">Stories</a></li><li><a href="/timeline/">Timeline</a></li><li><a href="/quiz/">Quiz</a></li><li><a href="/shop/">Shop</a></li></ul></div><div><h2>Project</h2><ul><li><a href="/about/">About and sources</a></li><li><a href="/privacy/">Privacy choices</a></li><li><a href="mailto:cbrennan2120@gmail.com">Contact Chris</a></li></ul></div></div>
+    <div class="shell footer-note">© 2026 Spirit of 1776. Independent project. Not affiliated with America250.</div>
   </footer>`;
 }
 
@@ -110,7 +114,7 @@ function merchCallout(story) {
 }
 
 function sourcesDrawer(story) {
-  return `<details class="source-drawer"><summary>Sources, image captions, and editorial notes</summary><div class="source-drawer__body"><ul>${story.sources.map((source) => `<li>${inlineMarkdown(source)}</li>`).join("")}</ul>${story.notes.map((note) => `<p>${inlineMarkdown(note)}</p>`).join("")}</div></details>`;
+  return `<details class="source-drawer"><summary>Sources, image captions, and editorial notes</summary><div class="source-drawer__body"><ul>${story.sources.map((source) => `<li>${inlineMarkdown(source)}</li>`).join("")}</ul>${story.notes.map((note) => `<p>${inlineMarkdown(note)}</p>`).join("")}<p><a href="/about/#artwork">How the artwork is made</a></p></div></details>`;
 }
 
 function storyPage(story, index, collection) {
@@ -119,7 +123,7 @@ function storyPage(story, index, collection) {
   const canonical = `https://spiritof1776.store/stories/${story.slug}/`;
   const merchandise = merchCallout(story);
   const chapters = story.sections.map((section, sectionIndex) => {
-    const figure = section.image ? `<figure class="story-chapter__figure">${responsiveImage(story, section.image, section.alt)}<figcaption>${inlineMarkdown(section.caption)}</figcaption></figure>` : "";
+    const figure = section.image ? `<figure class="story-chapter__figure">${responsiveImage(story, section.image, section.alt)}<figcaption>${presentationCaption(section.caption)}</figcaption></figure>` : "";
     return `<section class="story-chapter" aria-labelledby="chapter-${sectionIndex + 1}">
       <div class="story-chapter__copy"><p class="chapter-number">Scene ${String(sectionIndex + 1).padStart(2, "0")}</p><h2 id="chapter-${sectionIndex + 1}">${escapeHtml(section.heading)}</h2>${section.body}</div>${figure ? `
       ${figure}` : ""}
@@ -154,7 +158,7 @@ function storyPage(story, index, collection) {
           <p class="story-hero__summary">${escapeHtml(story.summary)}</p>
           <a class="button" href="#chapter-1">Begin the story</a>
         </div>
-        <figure class="story-hero__art">${responsiveImage(story, story.sections[0].image, story.sections[0].alt, true)}<figcaption>${inlineMarkdown(story.sections[0].caption)}</figcaption></figure>
+        <figure class="story-hero__art">${responsiveImage(story, story.sections[0].image, story.sections[0].alt, true)}<figcaption>${presentationCaption(story.sections[0].caption)}</figcaption></figure>
       </header>
       <div class="story-body">${chapters}</div>
       <div data-story-complete></div>
