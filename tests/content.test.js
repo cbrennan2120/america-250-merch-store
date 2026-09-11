@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { products, quizQuestions, stories, timeline } from "../src/data/content.js";
+import { productDesigns, products, quizQuestions, stories, timeline } from "../src/data/content.js";
 
 describe("launch content", () => {
   it("keeps the approved launch counts", () => {
@@ -11,7 +11,17 @@ describe("launch content", () => {
 
   it("uses unique stable identifiers", () => {
     expect(new Set(products.map(({ id }) => id)).size).toBe(products.length);
+    expect(productDesigns.map(({ id }) => id)).toEqual(["currently-revolting", "give-me-a-minute", "liber-tea"]);
+    expect(new Set(products.map(({ displayName }) => displayName)).size).toBe(products.length);
     expect(new Set(quizQuestions.map(({ id }) => id)).size).toBe(quizQuestions.length);
+  });
+
+  it("groups two products under each original design", () => {
+    for (const design of productDesigns) {
+      const matches = products.filter((product) => product.designId === design.id);
+      expect(matches).toHaveLength(2);
+      expect(matches.every((product) => product.designName === design.name)).toBe(true);
+    }
   });
 
   it("keeps live products linked to their checkout pages", () => {

@@ -1,24 +1,22 @@
 import "./styles.css";
-import { products } from "./data/content.js";
+import { productDesigns, products } from "./data/content.js";
 import { initializeConsent, track } from "./analytics.js";
 import { injectStructuredData } from "./structured-data.js";
 
-function productCard(product) {
+function productCard(product, headingLevel = 3) {
   const target = product.productUrl || product.storeUrl;
   const status = "Available now";
   const action = "View product";
-  const imageMarkup = product.imageAvif
-    ? `<picture>
-        <source srcset="${product.imageAvif}" type="image/avif">
-        <img src="${product.image}" alt="${product.alt}" width="1200" height="1000" loading="lazy">
-      </picture>`
-    : `<img src="${product.image}" alt="${product.alt}" width="1200" height="1000" loading="lazy">`;
+  const imageMarkup = `<picture>
+      ${product.imageAvif ? `<source srcset="${product.imageAvif}" type="image/avif">` : ""}
+      <img src="${product.image}" alt="${product.alt}" width="1200" height="1000" loading="lazy">
+    </picture>`;
   return `
     <article class="product-card" id="${product.id}">
       ${imageMarkup}
       <div class="product-card__body">
         <p class="eyebrow">${product.category}</p>
-        <h3>${product.name}</h3>
+        <h${headingLevel}>${product.displayName}</h${headingLevel}>
         <p>${product.description}</p>
         <p class="product-price">${product.priceLabel}</p>
         <p class="product-status">${status}</p>
@@ -29,7 +27,20 @@ function productCard(product) {
 
 function renderProducts() {
   document.querySelectorAll("[data-product-grid]").forEach((grid) => {
-    grid.innerHTML = products.map(productCard).join("");
+    if (grid.dataset.productDisplay === "grouped") {
+      grid.innerHTML = productDesigns.map((design) => {
+        const designProducts = products.filter((product) => product.designId === design.id);
+        return `<section class="product-design-group" aria-labelledby="design-${design.id}">
+          <div class="product-design-group__heading">
+            <p class="eyebrow">Original chibi design</p>
+            <h3 id="design-${design.id}">${design.name}</h3>
+          </div>
+          <div class="card-grid">${designProducts.map((product) => productCard(product, 4)).join("")}</div>
+        </section>`;
+      }).join("");
+      return;
+    }
+    grid.innerHTML = products.map((product) => productCard(product)).join("");
   });
 }
 

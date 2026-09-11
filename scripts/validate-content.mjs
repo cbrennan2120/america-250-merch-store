@@ -1,6 +1,6 @@
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { products, quizQuestions, stories, timeline } from "../src/data/content.js";
+import { productDesigns, products, quizQuestions, stories, timeline } from "../src/data/content.js";
 
 const root = resolve(import.meta.dirname, "..");
 const errors = [];
@@ -26,16 +26,23 @@ const approvedSource = (value) => {
 
 if (products.length !== 6) errors.push("The chibi launch catalog must contain exactly six products.");
 if (!unique(products.map(({ id }) => id))) errors.push("Product IDs must be unique.");
+if (productDesigns.length !== 3 || !unique(productDesigns.map(({ id }) => id))) errors.push("The catalog must contain three unique designs.");
+if (!unique(products.map(({ displayName }) => displayName))) errors.push("Product display names must be unique.");
+const designIds = new Set(productDesigns.map(({ id }) => id));
 for (const product of products) {
-  for (const key of ["id", "name", "category", "priceLabel", "image", "alt", "description", "analyticsLabel", "availability"]) {
+  for (const key of ["id", "designId", "designName", "displayName", "name", "category", "priceLabel", "image", "alt", "description", "analyticsLabel", "availability"]) {
     if (!product[key]) errors.push(`Product ${product.id || "unknown"} is missing ${key}.`);
   }
+  if (!designIds.has(product.designId)) errors.push(`Product ${product.id} has an unknown design ID.`);
   for (const file of [product.image]) {
     if (file && !existsSync(resolve(root, "public", file.replace(/^\//, "")))) errors.push(`Missing product asset ${file}.`);
   }
   const destination = product.productUrl || product.storeUrl;
   if (!destination?.startsWith("https://") || /example|placeholder/i.test(destination)) errors.push(`Product ${product.id} has an invalid store URL.`);
   if (product.availability === "live" && !product.productUrl) errors.push(`Live product ${product.id} requires a product-specific URL.`);
+}
+for (const design of productDesigns) {
+  if (products.filter(({ designId }) => designId === design.id).length !== 2) errors.push(`Design ${design.id} must contain exactly two products.`);
 }
 
 if (stories.length !== 10 || !unique(stories.map(({ slug }) => slug))) errors.push("Stories must contain ten unique slugs.");
@@ -59,6 +66,17 @@ if (!aboutHtml.includes('href="https://chrisbrennan.net/" rel="author">Chris Bre
 if (!structuredDataSource.includes('"@id": "https://chrisbrennan.net/#person"')) {
   errors.push("Structured data must reference the shared Chris Brennan Person identity.");
 }
+
+const publicHtmlPaths = [
+  "index.html", "shop/index.html", "about/index.html", "privacy/index.html", "timeline/index.html", "quiz/index.html", "404.html", "stories/index.html",
+  ...stories.map(({ slug }) => `stories/${slug}/index.html`)
+];
+const publicHtml = publicHtmlPaths.map((path) => readFileSync(resolve(root, path), "utf8"));
+if (publicHtml.some((html) => html.includes("github.com/cbrennan2120/america-250-merch-store/issues"))) errors.push("Customer-facing pages must not use GitHub for contact.");
+if (publicHtml.filter((html) => html.includes("AI-assisted")).length !== 1 || !aboutHtml.includes("AI-assisted")) errors.push("AI-assisted artwork disclosure must appear only on the About page.");
+if (!publicHtml.every((html) => html.includes("mailto:cbrennan2120@gmail.com"))) errors.push("Every customer-facing page must provide the customer contact email.");
+if (readFileSync(resolve(root, "index.html"), "utf8").includes("<span>Not affiliated with America250</span>")) errors.push("The homepage trust strip must not contain the affiliation disclaimer.");
+if ((readFileSync(resolve(root, "shop", "index.html"), "utf8").match(/Not affiliated with America250/g) || []).length !== 1) errors.push("The shop page must keep the affiliation disclaimer only in its footer.");
 
 if (errors.length) {
   console.error(errors.join("\n"));
