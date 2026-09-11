@@ -1,3 +1,5 @@
+import "./stories.css";
+
 const progress = document.querySelector("[data-reading-progress]");
 
 function updateReadingProgress() {

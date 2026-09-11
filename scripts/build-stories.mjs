@@ -30,7 +30,7 @@ function paragraphs(markdown) {
     .trim()
     .split(/\n\s*\n/)
     .filter(Boolean)
-    .map((block) => `<p>${inlineMarkdown(block.replace(/\n/g, " "))}</p>`)
+    .map((block) => `<p>${inlineMarkdown(block.replace(/[\r\n]+/g, " ").trim())}</p>`)
     .join("\n");
 }
 
@@ -171,8 +171,9 @@ function storyPage(story, index, collection) {
 </html>`;
 }
 
-function storyCard(story) {
-  return `<article class="story-card story-card--${story.theme}" data-era="${escapeHtml(story.era)}"><a class="story-card__image" href="/stories/${story.slug}/" aria-label="Read ${escapeHtml(story.title)}">${responsiveImage(story, story.sections[0].image, "", false)}</a><div class="story-card__body"><p class="eyebrow">${escapeHtml(story.era)} / ${story.readMinutes} min read</p><h2><a href="/stories/${story.slug}/" data-story-link="${story.slug}">${escapeHtml(story.title)}</a></h2><p class="story-card__subtitle">${escapeHtml(story.subtitle)}</p><p>${escapeHtml(story.summary)}</p></div></article>`;
+function storyCard(story, index) {
+  const previews = story.sections.slice(0, 3).map((section) => `<img src="${imageBase(story, section.image)}-768.webp" alt="" loading="lazy" decoding="async">`).join("");
+  return `<article class="story-card story-card--${story.theme}" id="story-${story.slug}" data-era="${escapeHtml(story.era)}"><a class="story-card__preview" href="/stories/${story.slug}/" aria-label="Preview ${escapeHtml(story.title)}"><span class="story-card__number" aria-hidden="true">${String(index + 1).padStart(2, "0")}</span>${previews}</a><div class="story-card__body"><div class="story-card__meta"><span>${escapeHtml(story.era)}</span><span>${story.readMinutes} min read</span></div><p class="story-card__format">${escapeHtml(story.format)}</p><h2>${escapeHtml(story.title)}</h2><p class="story-card__subtitle">${escapeHtml(story.subtitle)}</p><p>${escapeHtml(story.summary)}</p><a class="story-card__action" href="/stories/${story.slug}/" data-story-link="${story.slug}">Read this story <span aria-hidden="true">→</span></a></div></article>`;
 }
 
 function hubPage(stories) {
@@ -188,8 +189,9 @@ function hubPage(stories) {
 <body class="preview-index">
   ${header()}
   <main id="main">
-    <section class="index-hero"><div class="index-hero__copy"><p class="eyebrow">Ten chibi history stories</p><h1>Liberty keeps asking for courage.</h1><p>Meet the people who argued, resisted, served, marched, investigated, and forced American promises to grow. The art is playful; the history stays sourced and serious where it needs to be.</p><a class="button" href="#stories">Explore all ten</a></div><div class="index-hero__mosaic" aria-hidden="true">${stories.slice(0, 4).map((story) => `<img src="${imageBase(story, story.sections[0].image)}-768.webp" alt="" decoding="async">`).join("")}</div></section>
-    <section class="preview-note" aria-labelledby="story-filter-heading"><p class="eyebrow">Story path</p><h2 id="story-filter-heading">From 1775 to Watergate</h2><p>These ten moments trace a through-line: rights before rulers, power on loan, liberty widened by people brave enough to demand that America live up to its own words.</p></section>
+    <section class="index-hero"><div class="index-hero__copy"><p class="eyebrow">Choose your moment</p><h1>Ten stories. One American idea.</h1><p>Start in 1775 and travel through two centuries of people defending liberty, limiting power, and holding leaders accountable. Every story is illustrated, sourced, and built for a quick read.</p><a class="button-link" href="#stories">Browse all ten <span aria-hidden="true">↓</span></a></div><div class="index-hero__mosaic" aria-hidden="true">${stories.slice(0, 4).map((story) => `<img src="${imageBase(story, story.sections[0].image)}-768.webp" alt="" decoding="async">`).join("")}</div></section>
+    <nav class="story-jump" aria-label="Jump to a story"><div><p>Jump to a story</p><ol>${stories.map((story, index) => `<li><a href="#story-${story.slug}"><span>${String(index + 1).padStart(2, "0")}</span>${escapeHtml(story.title)}</a></li>`).join("")}</ol></div></nav>
+    <section class="preview-note" aria-labelledby="story-filter-heading"><p class="eyebrow">The complete collection</p><h2 id="story-filter-heading">Pick the moment that grabs you.</h2><p>Each preview shows scenes from the story, its place in the timeline, and how long it takes to read. Read chronologically or jump straight to the subject that interests you.</p></section>
     <section class="story-grid" id="stories" aria-label="Ten Spirit of 1776 stories">${stories.map(storyCard).join("\n")}</section>
   </main>
   ${footer()}

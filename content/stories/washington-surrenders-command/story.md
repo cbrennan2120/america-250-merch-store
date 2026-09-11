@@ -48,19 +48,17 @@ Congress itself was weak under the Articles of Confederation, and Washington bel
 
 *The Commission Returned — In Annapolis on December 23, Washington publicly returned the authority Congress had entrusted to him. The ceremony placed civilian government above personal military command. Illustration: original AI-assisted chibi artwork created for Spirit of 1776.*
 
-### A citizen again—and an unfinished freedom
+### A citizen again
 
 Washington left Annapolis at dawn on December 24 and reached Mount Vernon before nightfall. For the first time in almost nine years, he was a private citizen. He expected his military career and public employment to be over, although the country would later call him back for the Constitutional Convention and presidency.
 
-His retirement established a powerful example, but it did not make Washington’s private world free. Mount Vernon was a plantation sustained by enslaved labor. Washington returned from surrendering public power to a household in which hundreds of Black people lacked control over their labor, movement, and family security. Some people enslaved at Mount Vernon had escaped during the war rather than wait for American promises of liberty to include them.
+The timing carried the lesson home. On December 23, Washington stood before Congress as commander in chief. On December 24, he was back at Mount Vernon as a private citizen. His fame did not exempt him from the republican order; public authority had been entrusted to him for a purpose, and he returned it when that purpose was complete.
 
-This contradiction must remain in the story. Washington showed rare restraint over national military power while continuing to exercise coercive personal power as an enslaver. He later expressed opposition to slavery and provided in his will for the eventual emancipation of the people he personally owned, but he did not free them during his lifetime. Many people held through the Custis estate remained enslaved.
+Americans remembered the act because it demonstrated something rare and practical: victory did not entitle a military leader to permanent power. Washington could be called to public service again, but any future authority would come through civilian institutions rather than possession of an army.
 
-The honest lesson is therefore not that one virtuous man completed American liberty. It is that a valuable republican principle can be real even when the person demonstrating it fails to apply freedom consistently. Later Americans would have to use that principle more broadly than Washington did.
+![Washington arrives at wintertime Mount Vernon in civilian clothing as Martha greets him and activity continues around the estate.](04-a-citizen-again.png)
 
-![Washington arrives at wintertime Mount Vernon in civilian clothing as Martha greets him and enslaved adults and children continue plantation labor with reserved expressions nearby.](04-a-citizen-again.png)
-
-*A Citizen Again — Washington reached Mount Vernon on Christmas Eve. His return to private life modeled civilian restraint while exposing an unfinished freedom: the estate depended on enslaved people who did not share that liberty. Illustration: original AI-assisted chibi artwork created for Spirit of 1776.*
+*A Citizen Again — Washington reached Mount Vernon on Christmas Eve. One day after returning his commission, the commander in chief was once again a private citizen. Illustration: original AI-assisted chibi artwork created for Spirit of 1776.*
 
 ### Why this is the Spirit of 1776
 
