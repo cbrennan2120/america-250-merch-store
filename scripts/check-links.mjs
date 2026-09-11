@@ -13,7 +13,8 @@ const htmlFiles = [
   "quiz/index.html",
   "shop/index.html",
   "about/index.html",
-  "privacy/index.html"
+  "privacy/index.html",
+  "flight-93/index.html"
 ];
 const errors = [];
 

@@ -68,7 +68,7 @@ if (!structuredDataSource.includes('"@id": "https://chrisbrennan.net/#person"'))
 }
 
 const publicHtmlPaths = [
-  "index.html", "shop/index.html", "about/index.html", "privacy/index.html", "timeline/index.html", "quiz/index.html", "404.html", "stories/index.html",
+  "index.html", "shop/index.html", "about/index.html", "privacy/index.html", "timeline/index.html", "quiz/index.html", "flight-93/index.html", "404.html", "stories/index.html",
   ...stories.map(({ slug }) => `stories/${slug}/index.html`)
 ];
 const publicHtml = publicHtmlPaths.map((path) => readFileSync(resolve(root, path), "utf8"));

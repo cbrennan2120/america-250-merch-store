@@ -20,6 +20,7 @@ export default defineConfig({
         shop: page("shop/index.html"),
         about: page("about/index.html"),
         privacy: page("privacy/index.html"),
+        flight93: page("flight-93/index.html"),
         notFound: page("404.html")
       }
     }

@@ -11,7 +11,7 @@
     "validate:content": "node scripts/validate-content.mjs",
     "build": "npm run assets && npm run stories && npm run validate:content && vite build && node scripts/postbuild.mjs",
     "test": "vitest run",
-    "test:html": "html-validate \"*.html\" \"stories/**/*.html\" \"timeline/**/*.html\" \"quiz/**/*.html\" \"shop/**/*.html\" \"about/**/*.html\" \"privacy/**/*.html\" \"404.html\"",
+    "test:html": "html-validate \"*.html\" \"stories/**/*.html\" \"timeline/**/*.html\" \"quiz/**/*.html\" \"shop/**/*.html\" \"about/**/*.html\" \"privacy/**/*.html\" \"flight-93/**/*.html\" \"404.html\"",
     "test:links": "node scripts/check-links.mjs",
     "test:e2e": "playwright test",
     "check": "npm run test && npm run test:html && npm run test:links && npm run build"

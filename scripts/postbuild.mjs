@@ -21,7 +21,11 @@ const routes = [
   { path: "/quiz/" },
   { path: "/shop/", images: products.map((product) => ({ path: product.image, title: product.name })) },
   { path: "/about/" },
-  { path: "/privacy/" }
+  { path: "/privacy/" },
+  {
+    path: "/flight-93/",
+    images: [{ path: "/assets/flight-93/social-card.jpg", title: "Flight 93: They learned, voted, and acted" }]
+  }
 ];
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
