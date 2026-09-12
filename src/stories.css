@@ -189,6 +189,47 @@ summary:focus-visible {
   background: var(--red-700);
 }
 
+.breadcrumbs {
+  padding: 0.7rem clamp(1.25rem, 6vw, 6rem);
+  border-bottom: 1px solid rgb(16 37 63 / 14%);
+  background: var(--cream-100);
+  color: var(--navy-700);
+  font-size: 0.75rem;
+}
+
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.6rem;
+  max-width: 92rem;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumbs li + li::before {
+  margin-right: 0.6rem;
+  color: var(--red-700);
+  content: "/";
+}
+
+.story-byline {
+  padding-top: 0.85rem;
+  border-top: 1px solid rgb(255 253 247 / 24%);
+  color: var(--cream-100);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.story-byline span {
+  color: var(--cream-300);
+}
+
+.story-byline a {
+  color: var(--cream-50);
+  font-weight: 800;
+}
+
 .index-hero {
   display: grid;
   min-height: min(38rem, calc(100vh - 5rem));
