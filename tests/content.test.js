@@ -28,6 +28,8 @@ describe("launch content", () => {
     for (const product of products) {
       expect(product.availability).toBe("live");
       expect(product.priceLabel).toMatch(/^\$\d+\.\d{2}$/);
+      expect(product.href).toBe(`/shop/${product.slug}/`);
+      expect(product.galleryImages).toHaveLength(3);
       expect(product.productUrl).toMatch(/^https:\/\/shop\.spiritof1776\.store\/product\/\d+$/);
     }
   });
