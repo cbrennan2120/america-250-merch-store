@@ -8,9 +8,22 @@ export const productDesigns = [
   { id: "liber-tea", name: "Liber-Tea" }
 ];
 
+const shippingSummary = "Made to order. Shipping choices, costs, and delivery estimates appear after you enter your address at checkout.";
+const returnSummary = "If your item arrives defective or damaged, contact us within 30 days. Printify's Terms and Returns Policy determine the available solution.";
+const apparelCare = ["Machine wash cold with similar colors", "Tumble dry low", "Iron or steam on low heat", "Do not bleach or dry clean"];
+const stickerSpecifications = ["White die-cut sticker", "Matte finish", "UV-protective laminate", "Premium water-resistant vinyl", "Printed with Eco-Solvent inks"];
+const stickerCare = ["Apply to a clean, dry, smooth surface", "Brush dust away gently with a soft, clean, dry cloth"];
+const gallery = (slug, images) => images.map(({ label, alt }) => ({
+  src: `/assets/products/gallery/${slug}-${label}-1200.webp`,
+  srcSet: `/assets/products/gallery/${slug}-${label}-768.webp 768w, /assets/products/gallery/${slug}-${label}-1200.webp 1200w`,
+  alt
+}));
+
 export const products = [
   {
     id: "currently-revolting-tee",
+    slug: "currently-revolting-tee",
+    href: "/shop/currently-revolting-tee/",
     designId: "currently-revolting",
     designName: "Currently Revolting",
     displayName: "Currently Revolting Tee",
@@ -20,6 +33,21 @@ export const products = [
     image: "/assets/products/currently-revolting-tee.webp",
     alt: "Sticker-style chibi colonial patriot kicking over a tea crate with flying leaves",
     description: "A lightweight Gildan Softstyle unisex tee with a front DTG print of our tea-crate-kicking patriot. Adult sizes S-3XL in Dark Heather.",
+    seoTitle: "Currently Revolting Tee | Spirit of 1776",
+    metaDescription: "Shop the Currently Revolting chibi history tee in Dark Heather, available in adult sizes S–3XL and made to order.",
+    longDescription: "Currently Revolting is for history fans who appreciate a good protest and a bad tea pun. A furious little patriot, flying tea leaves, and one doomed crate turn Revolutionary-era frustration into something worth wearing.",
+    specifications: ["Gildan 64000 Softstyle unisex T-shirt", "Lightweight 4.5 oz/yd² fabric", "Classic crew neckline", "Ribbed collar and shoulder tape", "Front DTG print by Monster Digital"],
+    materials: ["Dark Heather: 65% polyester and 35% ring-spun cotton"],
+    careInstructions: apparelCare,
+    sizesOrDimensions: "Adult sizes S–3XL. Dark Heather only. Consult Printify's size guide before ordering.",
+    shippingSummary,
+    returnSummary,
+    primaryImage: "/assets/products/gallery/currently-revolting-tee-folded-1200.webp",
+    galleryImages: gallery("currently-revolting-tee", [
+      { label: "folded", alt: "Currently Revolting artwork printed on a folded Dark Heather Gildan Softstyle T-shirt" },
+      { label: "front", alt: "Front view of the Currently Revolting Dark Heather unisex T-shirt" },
+      { label: "lifestyle", alt: "Model wearing the Currently Revolting Dark Heather T-shirt" }
+    ]),
     productUrl: "https://shop.spiritof1776.store/product/31839516",
     storeUrl: STORE_URL,
     analyticsLabel: "currently_revolting_tee",
@@ -28,6 +56,8 @@ export const products = [
   },
   {
     id: "currently-revolting-sticker",
+    slug: "currently-revolting-sticker",
+    href: "/shop/currently-revolting-sticker/",
     designId: "currently-revolting",
     designName: "Currently Revolting",
     displayName: "Currently Revolting Sticker",
@@ -37,6 +67,21 @@ export const products = [
     image: "/assets/products/currently-revolting-sticker.webp",
     alt: "Die-cut chibi colonial patriot kicking over a wooden tea crate",
     description: "A four-inch die-cut sticker of our furious little patriot, ready for notebooks, bottles, and history kits.",
+    seoTitle: "Currently Revolting Sticker | Spirit of 1776",
+    metaDescription: "Shop the four-inch Currently Revolting matte die-cut vinyl sticker, made to order for history fans.",
+    longDescription: "Currently Revolting turns a tea-crate tantrum into a small badge of Revolutionary-era mischief. Stick it somewhere that could use a little historical attitude.",
+    specifications: stickerSpecifications,
+    materials: ["Premium white vinyl", "Matte protective laminate"],
+    careInstructions: stickerCare,
+    sizesOrDimensions: "4 × 4 inch die-cut sticker in white vinyl.",
+    shippingSummary,
+    returnSummary,
+    primaryImage: "/assets/products/gallery/currently-revolting-sticker-front-1200.webp",
+    galleryImages: gallery("currently-revolting-sticker", [
+      { label: "front", alt: "Front view of the four-inch Currently Revolting die-cut sticker" },
+      { label: "notebook", alt: "Currently Revolting sticker displayed on a silver laptop" },
+      { label: "bottle", alt: "Currently Revolting sticker displayed on a black skateboard deck" }
+    ]),
     productUrl: "https://shop.spiritof1776.store/product/31839757",
     storeUrl: STORE_URL,
     analyticsLabel: "currently_revolting_sticker",
@@ -45,6 +90,8 @@ export const products = [
   },
   {
     id: "give-me-a-minute-crewneck",
+    slug: "give-me-a-minute-crewneck",
+    href: "/shop/give-me-a-minute-crewneck/",
     designId: "give-me-a-minute",
     designName: "Give Me a Minute",
     displayName: "Give Me a Minute Crewneck",
@@ -54,6 +101,21 @@ export const products = [
     image: "/assets/products/give-me-a-minute-crewneck.webp",
     alt: "Frazzled chibi minuteman half dressed with one boot missing and a crooked tricorn hat",
     description: "A navy Gildan Heavy Blend crewneck starring a minuteman who is not quite ready, but is still showing up. Adult sizes S-3XL.",
+    seoTitle: "Give Me a Minute Crewneck | Spirit of 1776",
+    metaDescription: "Shop the Give Me a Minute chibi minuteman crewneck in Navy, available in adult sizes S–3XL and made to order.",
+    longDescription: "Give Me a Minute is for everyone who has ever been called to action before finding the other boot. The frazzled minuteman brings a little chaos to a comfortable cold-weather layer.",
+    specifications: ["Gildan 18000 Heavy Blend unisex crewneck", "8 oz/yd² fleece", "Classic fit", "Ribbed collar, cuffs, and waistband", "Front DTG print by Monster Digital"],
+    materials: ["50% U.S. cotton and 50% polyester"],
+    careInstructions: apparelCare,
+    sizesOrDimensions: "Adult sizes S–3XL. Navy only. Consult Printify's size guide before ordering.",
+    shippingSummary,
+    returnSummary,
+    primaryImage: "/assets/products/gallery/give-me-a-minute-crewneck-front-1200.webp",
+    galleryImages: gallery("give-me-a-minute-crewneck", [
+      { label: "front", alt: "Front view of the Give Me a Minute Navy Gildan Heavy Blend crewneck" },
+      { label: "folded", alt: "Give Me a Minute crewneck folded to show the chibi minuteman print" },
+      { label: "detail", alt: "Close view of the Give Me a Minute artwork on Navy crewneck fabric" }
+    ]),
     productUrl: "https://shop.spiritof1776.store/product/31839649",
     storeUrl: STORE_URL,
     analyticsLabel: "give_me_a_minute_crewneck",
@@ -62,6 +124,8 @@ export const products = [
   },
   {
     id: "give-me-a-minute-sticker",
+    slug: "give-me-a-minute-sticker",
+    href: "/shop/give-me-a-minute-sticker/",
     designId: "give-me-a-minute",
     designName: "Give Me a Minute",
     displayName: "Give Me a Minute Sticker",
@@ -71,6 +135,21 @@ export const products = [
     image: "/assets/products/give-me-a-minute-sticker.webp",
     alt: "Panicked chibi minuteman with one boot on, one boot missing, and a musket under his arm",
     description: "A four-inch die-cut sticker for anyone who has ever been called to action before finishing breakfast.",
+    seoTitle: "Give Me a Minute Sticker | Spirit of 1776",
+    metaDescription: "Shop the four-inch Give Me a Minute chibi minuteman matte die-cut vinyl sticker, made to order.",
+    longDescription: "Give Me a Minute is for anyone who has ever been called to action before finding the other boot. This panicked little minuteman is ready for notebooks, bottles, and everyday emergencies.",
+    specifications: stickerSpecifications,
+    materials: ["Premium white vinyl", "Matte protective laminate"],
+    careInstructions: stickerCare,
+    sizesOrDimensions: "4 × 4 inch die-cut sticker in white vinyl.",
+    shippingSummary,
+    returnSummary,
+    primaryImage: "/assets/products/gallery/give-me-a-minute-sticker-front-1200.webp",
+    galleryImages: gallery("give-me-a-minute-sticker", [
+      { label: "front", alt: "Front view of the four-inch Give Me a Minute die-cut sticker" },
+      { label: "notebook", alt: "Give Me a Minute sticker displayed on a silver laptop" },
+      { label: "bottle", alt: "Give Me a Minute sticker displayed on a black skateboard deck" }
+    ]),
     productUrl: "https://shop.spiritof1776.store/product/31839795",
     storeUrl: STORE_URL,
     analyticsLabel: "give_me_a_minute_sticker",
@@ -79,6 +158,8 @@ export const products = [
   },
   {
     id: "liber-tea-mug",
+    slug: "liber-tea-mug",
+    href: "/shop/liber-tea-mug/",
     designId: "liber-tea",
     designName: "Liber-Tea",
     displayName: "Liber-Tea Mug",
@@ -88,6 +169,21 @@ export const products = [
     image: "/assets/products/liber-tea-mug.webp",
     alt: "Horizontal mug artwork with cheerful chibi patriot raising an oversized steaming teacup",
     description: "An 11-ounce white ceramic mug for tea, coffee, and very serious puns about self-government.",
+    seoTitle: "Liber-Tea Mug | Spirit of 1776",
+    metaDescription: "Shop the 11-ounce Liber-Tea glossy white ceramic mug with a two-sided chibi patriot design.",
+    longDescription: "Liber-Tea serves a very serious self-government pun with every cup. The cheerful patriot and oversized teacup wrap around an 11-ounce white mug.",
+    specifications: ["11-ounce mug", "Glossy ceramic finish", "Two-sided dye-sublimation print", "Microwave-safe", "BPA-free"],
+    materials: ["White glossy ceramic"],
+    careInstructions: ["Hand wash only to protect the print", "Microwave-safe"],
+    sizesOrDimensions: "11 fluid ounces. White only.",
+    shippingSummary,
+    returnSummary,
+    primaryImage: "/assets/products/gallery/liber-tea-mug-front-1200.webp",
+    galleryImages: gallery("liber-tea-mug", [
+      { label: "front", alt: "Front view of the white 11-ounce Liber-Tea ceramic mug" },
+      { label: "left", alt: "Left-side view showing the two-sided Liber-Tea mug design" },
+      { label: "right", alt: "Right-side view of the glossy white Liber-Tea mug" }
+    ]),
     productUrl: "https://shop.spiritof1776.store/product/31845608",
     storeUrl: STORE_URL,
     analyticsLabel: "liber_tea_mug",
@@ -96,6 +192,8 @@ export const products = [
   },
   {
     id: "liber-tea-sticker",
+    slug: "liber-tea-sticker",
+    href: "/shop/liber-tea-sticker/",
     designId: "liber-tea",
     designName: "Liber-Tea",
     displayName: "Liber-Tea Sticker",
@@ -105,6 +203,21 @@ export const products = [
     image: "/assets/products/liber-tea-sticker.webp",
     alt: "Cheerful chibi patriot lifting an oversized steaming teacup with broken tea crates nearby",
     description: "A four-inch die-cut sticker for history fans who appreciate a well-timed tea joke.",
+    seoTitle: "Liber-Tea Sticker | Spirit of 1776",
+    metaDescription: "Shop the four-inch Liber-Tea chibi patriot matte die-cut vinyl sticker, made to order.",
+    longDescription: "Liber-Tea turns a well-timed tea joke into a four-inch die-cut sticker. It is a cheerful little reminder that history and humor can share the same cup.",
+    specifications: stickerSpecifications,
+    materials: ["Premium white vinyl", "Matte protective laminate"],
+    careInstructions: stickerCare,
+    sizesOrDimensions: "4 × 4 inch die-cut sticker in white vinyl.",
+    shippingSummary,
+    returnSummary,
+    primaryImage: "/assets/products/gallery/liber-tea-sticker-front-1200.webp",
+    galleryImages: gallery("liber-tea-sticker", [
+      { label: "front", alt: "Front view of the four-inch Liber-Tea die-cut sticker" },
+      { label: "notebook", alt: "Liber-Tea sticker displayed on a silver laptop" },
+      { label: "bottle", alt: "Liber-Tea sticker displayed on a black skateboard deck" }
+    ]),
     productUrl: "https://shop.spiritof1776.store/product/31839925",
     storeUrl: STORE_URL,
     analyticsLabel: "liber_tea_sticker",

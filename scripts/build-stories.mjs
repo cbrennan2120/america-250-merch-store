@@ -164,7 +164,7 @@ function merchCallout(story) {
   if (story.merchandiseMode === "none") return "";
   const related = products.filter((product) => story.relatedProductIds?.includes(product.id)).slice(0, 2);
   if (!related.length) return `<aside class="story-shop-note" aria-label="Related shop note"><p class="eyebrow">Shop note</p><h2>Inspired by the early republic collection</h2><p>The first chibi collection focuses on playful Revolutionary-era moments. Serious stories keep the product pitch out of the narrative.</p><a class="button button--secondary" href="/shop/">Visit the shop</a></aside>`;
-  return `<aside class="story-shop-note" aria-label="Related collection"><p class="eyebrow">Related collection</p><h2>Carry the story forward</h2><div class="story-product-row">${related.map((product) => `<a class="story-product-mini" href="${product.productUrl}" target="_blank" rel="noopener" data-product-link="${product.analyticsLabel}"><img src="${product.image}" alt="" loading="lazy"><span>${product.name}</span><strong>${product.priceLabel}</strong></a>`).join("")}</div></aside>`;
+  return `<aside class="story-shop-note" aria-label="Related collection"><p class="eyebrow">Related collection</p><h2>Carry the story forward</h2><div class="story-product-row">${related.map((product) => `<a class="story-product-mini" href="${product.href}"><img src="${product.image}" alt="" loading="lazy"><span>${product.name}</span><strong>${product.priceLabel}</strong></a>`).join("")}</div></aside>`;
 }
 
 function sourcesDrawer(story) {

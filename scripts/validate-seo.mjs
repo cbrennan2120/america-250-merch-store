@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import sharp from "sharp";
 import { stories } from "../src/data/story-manifest.js";
+import { products } from "../src/data/content.js";
 
 const root = resolve(import.meta.dirname, "..");
 const origin = "https://spiritof1776.store";
@@ -13,6 +14,7 @@ const pages = [
   { file: "timeline/index.html", route: "/timeline/" },
   { file: "quiz/index.html", route: "/quiz/" },
   { file: "shop/index.html", route: "/shop/" },
+  ...products.map(({ slug }) => ({ file: `shop/${slug}/index.html`, route: `/shop/${slug}/` })),
   { file: "about/index.html", route: "/about/" },
   { file: "privacy/index.html", route: "/privacy/" },
   { file: "flight-93/index.html", route: "/flight-93/" }

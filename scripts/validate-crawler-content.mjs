@@ -26,7 +26,7 @@ for (const [path, grouped] of [["index.html", false], ["shop/index.html", true]]
   const cardCount = (html.match(/class="product-card"/g) || []).length;
   if (cardCount !== 6) errors.push(`${path} must expose six product cards in raw HTML; found ${cardCount}.`);
   for (const product of products) {
-    for (const value of [product.displayName, product.description, product.priceLabel, product.image, product.productUrl]) {
+    for (const value of [product.displayName, product.description, product.priceLabel, product.image, product.href]) {
       if (!html.includes(value)) errors.push(`${path} is missing crawler-visible product content: ${value}`);
     }
   }
@@ -42,10 +42,22 @@ const shopGraph = graphFrom("shop/index.html");
 const productNodes = shopGraph.filter((node) => node["@type"] === "Product");
 if (productNodes.length !== 6) errors.push(`Shop schema must contain six Product nodes; found ${productNodes.length}.`);
 for (const product of products) {
-  const node = productNodes.find((candidate) => candidate["@id"]?.endsWith(`#${product.id}`));
-  if (!node || node.name !== product.displayName || node.offers?.price !== product.priceLabel.replace(/[^0-9.]/g, "") || node.offers?.url !== product.productUrl || node.image !== `https://spiritof1776.store${product.image}`) {
+  const node = productNodes.find((candidate) => candidate["@id"] === `https://spiritof1776.store${product.href}#product`);
+  if (!node || node.name !== product.displayName || node.offers?.price !== product.priceLabel.replace(/[^0-9.]/g, "") || node.offers?.url !== product.productUrl || !node.image?.includes(`https://spiritof1776.store${product.primaryImage}`)) {
     errors.push(`Shop schema is incomplete for ${product.id}.`);
   }
+}
+
+for (const product of products) {
+  const path = `shop/${product.slug}/index.html`;
+  const html = read(path);
+  const graph = graphFrom(path);
+  const productNode = graph.find((node) => node["@type"] === "Product");
+  const breadcrumb = graph.find((node) => node["@type"] === "BreadcrumbList");
+  if (!html.includes(`<h1 id="product-title">${product.displayName}</h1>`) || !html.includes(product.priceLabel) || !html.includes(product.productUrl)) errors.push(`${path} is missing its product name, price, or checkout URL.`);
+  if ((html.match(/class="product-gallery__item/g) || []).length !== product.galleryImages.length) errors.push(`${path} must expose its complete gallery in raw HTML.`);
+  if (!breadcrumb || breadcrumb.itemListElement?.length !== 3) errors.push(`${path} needs three-level BreadcrumbList schema.`);
+  if (!productNode || productNode["@id"] !== `https://spiritof1776.store${product.href}#${"product"}` || productNode.offers?.url !== product.productUrl || productNode.offers?.price !== product.priceLabel.replace(/[^0-9.]/g, "")) errors.push(`${path} has incomplete Product or Offer schema.`);
 }
 
 const hubHtml = read("stories/index.html");
