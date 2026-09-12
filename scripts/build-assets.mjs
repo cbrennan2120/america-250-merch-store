@@ -1,4 +1,4 @@
-import { copyFile, mkdir, readFile } from "node:fs/promises";
+import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import sharp from "sharp";
@@ -117,13 +117,27 @@ async function renderBrandAssets() {
       <rect width="64" height="64" rx="12" fill="${colors.navy}"/>
       <path d="M32 8 38 22l15 1-12 10 4 15-13-8-13 8 4-15-12-10 15-1z" fill="${colors.gold}"/>
     </svg>`;
+  const faviconSource = Buffer.from(favicon.trim());
+  const favicon48 = await sharp(faviconSource).png().resize(48, 48).toBuffer();
+  const icoHeader = Buffer.alloc(22);
+  icoHeader.writeUInt16LE(0, 0);
+  icoHeader.writeUInt16LE(1, 2);
+  icoHeader.writeUInt16LE(1, 4);
+  icoHeader.writeUInt8(48, 6);
+  icoHeader.writeUInt8(48, 7);
+  icoHeader.writeUInt16LE(1, 10);
+  icoHeader.writeUInt16LE(32, 12);
+  icoHeader.writeUInt32LE(favicon48.length, 14);
+  icoHeader.writeUInt32LE(22, 18);
   await sharp(Buffer.from(og)).png().toFile(resolve(brandDir, "social-card.png"));
   await sharp(Buffer.from(og)).avif({ quality: 72 }).toFile(resolve(brandDir, "hero.avif"));
   await sharp(Buffer.from(og)).webp({ quality: 82 }).toFile(resolve(brandDir, "hero.webp"));
-  await sharp(Buffer.from(favicon)).png().resize(512, 512).toFile(resolve(brandDir, "favicon-512.png"));
-  await sharp(Buffer.from(favicon)).png().resize(192, 192).toFile(resolve(brandDir, "favicon-192.png"));
-  await sharp(Buffer.from(favicon)).png().resize(32, 32).toFile(resolve(brandDir, "favicon-32.png"));
-  await sharp(Buffer.from(favicon)).toFile(resolve(brandDir, "favicon.svg"));
+  await sharp(faviconSource).png().resize(512, 512).toFile(resolve(brandDir, "favicon-512.png"));
+  await sharp(faviconSource).png().resize(192, 192).toFile(resolve(brandDir, "favicon-192.png"));
+  await sharp(faviconSource).png().resize(96, 96).toFile(resolve(brandDir, "favicon-96.png"));
+  await writeFile(resolve(brandDir, "favicon-48.png"), favicon48);
+  await writeFile(resolve(brandDir, "favicon.svg"), favicon.trim(), "utf8");
+  await writeFile(resolve(root, "public", "favicon.ico"), Buffer.concat([icoHeader, favicon48]));
 }
 
 for (const file of ["eagle-crest-base.png", "fife-drum-base.png", "flag-badge-base.png"]) {

@@ -21,6 +21,27 @@ const escapeHtml = (value = "") => value
   .replaceAll(">", "&gt;")
   .replaceAll('"', "&quot;");
 
+const iconLinks = () => `<link rel="icon" href="/assets/brand/favicon.svg" type="image/svg+xml" sizes="any">
+  <link rel="icon" href="/assets/brand/favicon-48.png" type="image/png" sizes="48x48">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="48x48">
+  <link rel="apple-touch-icon" href="/assets/brand/favicon-192.png" sizes="192x192">
+  <link rel="manifest" href="/site.webmanifest">`;
+
+function socialMeta({ type, title, description, url, image, imageAlt }) {
+  return `<meta property="og:type" content="${type}">
+  <meta property="og:site_name" content="Spirit of 1776">
+  <meta property="og:title" content="${escapeHtml(title)}">
+  <meta property="og:description" content="${escapeHtml(description)}">
+  <meta property="og:url" content="${url}">
+  <meta property="og:image" content="${image}">
+  <meta property="og:image:alt" content="${escapeHtml(imageAlt)}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${escapeHtml(title)}">
+  <meta name="twitter:description" content="${escapeHtml(description)}">
+  <meta name="twitter:image" content="${image}">
+  <meta name="twitter:image:alt" content="${escapeHtml(imageAlt)}">`;
+}
+
 function inlineMarkdown(value) {
   return escapeHtml(value).replace(/\[([^\]]+)]\((https?:\/\/[^)]+)\)/g, '<a href="$2" rel="noreferrer">$1</a>');
 }
@@ -135,14 +156,11 @@ function storyPage(story, index, collection) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#13263d">
   <meta name="description" content="${escapeHtml(story.summary)}">
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="${escapeHtml(story.title)} | Spirit of 1776">
-  <meta property="og:description" content="${escapeHtml(story.summary)}">
-  <meta property="og:url" content="${canonical}">
-  <meta property="og:image" content="https://spiritof1776.store${story.socialImage}">
+  ${socialMeta({ type: "article", title: `${story.title} | Spirit of 1776`, description: story.summary, url: canonical, image: `https://spiritof1776.store${story.socialImage}`, imageAlt: story.sections[0].alt })}
   <link rel="canonical" href="${canonical}">
-  <link rel="icon" href="/assets/brand/favicon.svg" type="image/svg+xml"><link rel="icon" href="/assets/brand/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="/assets/brand/favicon-192.png"><link rel="manifest" href="/site.webmanifest">
+  ${iconLinks()}
   <title>${escapeHtml(story.title)} | Spirit of 1776</title>
 </head>
 <body class="story-page theme-${story.theme}">
@@ -185,9 +203,11 @@ function hubPage(stories) {
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#13263d">
   <meta name="description" content="Ten illustrated Spirit of 1776 stories about liberty, accountability, and America's unfinished promises.">
-  <meta property="og:type" content="website"><meta property="og:title" content="Stories | Spirit of 1776"><meta property="og:description" content="Ten illustrated, sourced American-history stories."><meta property="og:image" content="https://spiritof1776.store/assets/brand/social-card.png">
-  <link rel="canonical" href="https://spiritof1776.store/stories/"><link rel="icon" href="/assets/brand/favicon.svg" type="image/svg+xml"><link rel="icon" href="/assets/brand/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="/assets/brand/favicon-192.png"><link rel="manifest" href="/site.webmanifest">
+  ${socialMeta({ type: "website", title: "Stories | Spirit of 1776", description: "Ten illustrated, sourced American-history stories.", url: "https://spiritof1776.store/stories/", image: "https://spiritof1776.store/assets/brand/social-card.png", imageAlt: "Spirit of 1776 illustrated American-history stories" })}
+  <link rel="canonical" href="https://spiritof1776.store/stories/">
+  ${iconLinks()}
   <title>Stories | Spirit of 1776</title>
 </head>
 <body class="preview-index">
