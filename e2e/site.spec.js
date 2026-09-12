@@ -16,6 +16,28 @@ test("homepage renders the complete launch structure without console errors", as
   }
 });
 
+test("homepage and shop expose all products when JavaScript is disabled", async ({ browser }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  const page = await context.newPage();
+  await page.goto("/");
+  await expect(page.locator(".product-card")).toHaveCount(6);
+  await expect(page.locator('[data-product-link]')).toHaveCount(6);
+  await page.goto("/shop/");
+  await expect(page.locator(".product-design-group")).toHaveCount(3);
+  await expect(page.locator(".product-card")).toHaveCount(6);
+  await expect(page.locator('[data-product-link]')).toHaveCount(6);
+  await context.close();
+});
+
+test("raw HTML contains products and static structured data", async ({ request }) => {
+  for (const route of ["/", "/shop/"]) {
+    const response = await request.get(route);
+    const html = await response.text();
+    expect((html.match(/class="product-card"/g) || []).length).toBe(6);
+    expect((html.match(/data-static-structured-data/g) || []).length).toBe(1);
+  }
+});
+
 test("navigation works at mobile width", async ({ page }, testInfo) => {
   test.skip(!testInfo.project.name.startsWith("mobile"), "Mobile-only interaction");
   await page.goto("/");

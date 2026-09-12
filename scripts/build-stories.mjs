@@ -2,6 +2,7 @@ import { access, mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { products } from "../src/data/content.js";
 import { stories as manifest } from "../src/data/story-manifest.js";
+import { ORIGIN, baseGraph, breadcrumbSchema, creatorId, jsonLd, organizationId } from "./lib/static-content.mjs";
 
 const root = resolve(import.meta.dirname, "..");
 const contentRoot = resolve(root, "content", "stories");
@@ -48,6 +49,38 @@ function inlineMarkdown(value) {
 
 function presentationCaption(value) {
   return inlineMarkdown(value.replace(/\s*Illustration:\s*original AI-assisted chibi artwork created for Spirit of 1776\.?\s*$/i, "").trim());
+}
+
+function sourceUrls(story) {
+  return story.sources.flatMap((source) => [...source.matchAll(/\]\((https?:\/\/[^)]+)\)/g)].map((match) => match[1]));
+}
+
+const schemaDate = (value) => `${value}T12:00:00-04:00`;
+
+function articleSchema(story) {
+  const canonical = `${ORIGIN}${story.href}`;
+  return {
+    "@type": "Article",
+    "@id": `${canonical}#article`,
+    headline: story.title,
+    description: story.metaDescription,
+    image: { "@type": "ImageObject", url: `${ORIGIN}${story.primaryImage}`, caption: story.imageAlt },
+    author: { "@id": creatorId },
+    publisher: { "@id": organizationId },
+    mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
+    datePublished: schemaDate(story.publishedDate),
+    dateModified: schemaDate(story.modifiedDate),
+    citation: sourceUrls(story),
+    keywords: story.topics.join(", ")
+  };
+}
+
+function visibleBreadcrumbs(items) {
+  return `<nav class="breadcrumbs" aria-label="Breadcrumb"><ol>${items.map((item, index) => `<li>${index === items.length - 1 ? `<span aria-current="page">${escapeHtml(item.name)}</span>` : `<a href="${item.href}">${escapeHtml(item.name)}</a>`}</li>`).join("")}</ol></nav>`;
+}
+
+function displayDate(value) {
+  return new Intl.DateTimeFormat("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" }).format(new Date(`${value}T00:00:00Z`));
 }
 
 function paragraphs(markdown) {
@@ -142,6 +175,7 @@ function storyPage(story, index, collection) {
   const previous = collection[(index - 1 + collection.length) % collection.length];
   const next = collection[(index + 1) % collection.length];
   const canonical = `https://spiritof1776.store/stories/${story.slug}/`;
+  const crumbs = [{ name: "Home", href: "/" }, { name: "Stories", href: "/stories/" }, { name: story.title, href: story.href }];
   const merchandise = merchCallout(story);
   const chapters = story.sections.map((section, sectionIndex) => {
     const figure = section.image ? `<figure class="story-chapter__figure">${responsiveImage(story, section.image, section.alt)}<figcaption>${presentationCaption(section.caption)}</figcaption></figure>` : "";
@@ -157,16 +191,18 @@ function storyPage(story, index, collection) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#13263d">
-  <meta name="description" content="${escapeHtml(story.summary)}">
-  ${socialMeta({ type: "article", title: `${story.title} | Spirit of 1776`, description: story.summary, url: canonical, image: `https://spiritof1776.store${story.socialImage}`, imageAlt: story.sections[0].alt })}
+  <meta name="description" content="${escapeHtml(story.metaDescription)}">
+  ${socialMeta({ type: "article", title: story.seoTitle, description: story.metaDescription, url: canonical, image: `https://spiritof1776.store${story.primaryImage}`, imageAlt: story.imageAlt })}
   <link rel="canonical" href="${canonical}">
   ${iconLinks()}
-  <title>${escapeHtml(story.title)} | Spirit of 1776</title>
+  ${jsonLd([...baseGraph(), articleSchema(story), breadcrumbSchema(crumbs)])}
+  <title>${escapeHtml(story.seoTitle)}</title>
 </head>
 <body class="story-page theme-${story.theme}">
   ${header()}
   <progress class="reading-progress" data-reading-progress max="100" value="0" aria-label="Reading progress"></progress>
   <main id="main">
+    ${visibleBreadcrumbs(crumbs)}
     <article class="story-experiment" data-story-id="${story.slug}">
       <header class="story-hero">
         <div class="story-hero__copy">
@@ -174,6 +210,7 @@ function storyPage(story, index, collection) {
           <h1>${escapeHtml(story.title)}</h1>
           <p class="story-hero__subtitle">${escapeHtml(story.subtitle)}</p>
           <p class="story-hero__summary">${escapeHtml(story.summary)}</p>
+          <p class="story-byline">By <a href="/about/" rel="author">Chris Brennan</a><br><span>Published <time datetime="${story.publishedDate}">${displayDate(story.publishedDate)}</time> · Reviewed <time datetime="${story.modifiedDate}">${displayDate(story.modifiedDate)}</time></span></p>
           <a class="button" href="#chapter-1">Begin the story</a>
         </div>
         <figure class="story-hero__art">${responsiveImage(story, story.sections[0].image, story.sections[0].alt, true)}<figcaption>${presentationCaption(story.sections[0].caption)}</figcaption></figure>
@@ -199,6 +236,7 @@ function storyCard(story, index) {
 }
 
 function hubPage(stories) {
+  const crumbs = [{ name: "Home", href: "/" }, { name: "Stories", href: "/stories/" }];
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -208,11 +246,13 @@ function hubPage(stories) {
   ${socialMeta({ type: "website", title: "Stories | Spirit of 1776", description: "Ten illustrated, sourced American-history stories.", url: "https://spiritof1776.store/stories/", image: "https://spiritof1776.store/assets/brand/social-card.png", imageAlt: "Spirit of 1776 illustrated American-history stories" })}
   <link rel="canonical" href="https://spiritof1776.store/stories/">
   ${iconLinks()}
+  ${jsonLd([...baseGraph(), breadcrumbSchema(crumbs)])}
   <title>Stories | Spirit of 1776</title>
 </head>
 <body class="preview-index">
   ${header()}
   <main id="main">
+    ${visibleBreadcrumbs(crumbs)}
     <section class="index-hero"><div class="index-hero__copy"><p class="eyebrow">Choose your moment</p><h1>Ten stories. One American idea.</h1><p>Start in 1775 and travel through two centuries of people defending liberty, limiting power, and holding leaders accountable. Every story is illustrated, sourced, and built for a quick read.</p><a class="button-link" href="#stories">Browse all ten <span aria-hidden="true">↓</span></a></div><div class="index-hero__mosaic" aria-hidden="true">${stories.slice(0, 4).map((story) => `<img src="${imageBase(story, story.sections[0].image)}-768.webp" alt="" decoding="async">`).join("")}</div></section>
     <nav class="story-jump" aria-label="Jump to a story"><div><p>Jump to a story</p><ol>${stories.map((story, index) => `<li><a href="#story-${story.slug}"><span>${String(index + 1).padStart(2, "0")}</span>${escapeHtml(story.title)}</a></li>`).join("")}</ol></div></nav>
     <section class="preview-note" aria-labelledby="story-filter-heading"><p class="eyebrow">The complete collection</p><h2 id="story-filter-heading">Pick the moment that grabs you.</h2><p>Each preview shows scenes from the story, its place in the timeline, and how long it takes to read. Read chronologically or jump straight to the subject that interests you.</p></section>

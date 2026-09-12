@@ -5,7 +5,6 @@ import { productDesigns, products, quizQuestions, stories, timeline } from "../s
 const root = resolve(import.meta.dirname, "..");
 const errors = [];
 const aboutHtml = readFileSync(resolve(root, "about", "index.html"), "utf8");
-const structuredDataSource = readFileSync(resolve(root, "src", "structured-data.js"), "utf8");
 const unique = (values) => new Set(values).size === values.length;
 const approvedSource = (value) => {
   try {
@@ -48,6 +47,12 @@ for (const design of productDesigns) {
 if (stories.length !== 10 || !unique(stories.map(({ slug }) => slug))) errors.push("Stories must contain ten unique slugs.");
 for (const story of stories) {
   if (!story.href?.startsWith("/stories/")) errors.push(`Story ${story.slug} must use a permanent /stories/ route.`);
+  for (const key of ["publishedDate", "modifiedDate", "seoTitle", "metaDescription", "primaryImage", "imageAlt", "topics"]) {
+    if (!story[key] || (Array.isArray(story[key]) && !story[key].length)) errors.push(`Story ${story.slug} is missing ${key}.`);
+  }
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(story.publishedDate) || !/^\d{4}-\d{2}-\d{2}$/.test(story.modifiedDate)) errors.push(`Story ${story.slug} has an invalid publication or review date.`);
+  if (story.modifiedDate < story.publishedDate) errors.push(`Story ${story.slug} is modified before it was published.`);
+  if (!existsSync(resolve(root, "public", story.primaryImage.replace(/^\//, "")))) errors.push(`Story ${story.slug} is missing its primary image.`);
   if (story.sources?.length && story.sources.some((source) => !approvedSource(source))) errors.push(`Story ${story.slug} has a non-institutional source.`);
 }
 
@@ -63,10 +68,6 @@ for (const question of quizQuestions) {
 if (!aboutHtml.includes('href="https://chrisbrennan.net/" rel="author">Chris Brennan</a>')) {
   errors.push("The About page must identify and link to the project's creator.");
 }
-if (!structuredDataSource.includes('"@id": "https://chrisbrennan.net/#person"')) {
-  errors.push("Structured data must reference the shared Chris Brennan Person identity.");
-}
-
 const publicHtmlPaths = [
   "index.html", "shop/index.html", "about/index.html", "privacy/index.html", "timeline/index.html", "quiz/index.html", "flight-93/index.html", "404.html", "stories/index.html",
   ...stories.map(({ slug }) => `stories/${slug}/index.html`)
