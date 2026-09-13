@@ -131,7 +131,7 @@ const storyRoutes = [
   "/stories/watergate-accountability/"
 ];
 
-test("the permanent story hub links ten complete illustrated stories", async ({ page }) => {
+test("the permanent story hub links ten complete illustrated stories", async ({ page }, testInfo) => {
   test.setTimeout(60_000);
   await page.goto("/stories/");
   await expect(page.locator(".story-card")).toHaveCount(10);
@@ -142,10 +142,19 @@ test("the permanent story hub links ten complete illustrated stories", async ({ 
     await expect(page.locator(".story-chapter")).toHaveCount(5);
     await expect(page.locator(".story-chapter__figure")).toHaveCount(4);
     await expect(page.locator(".source-drawer")).toHaveCount(1);
+    await expect(page.locator(".related-stories")).toHaveCount(1);
+    await expect(page.locator(".related-story-card")).toHaveCount(3);
+    const relatedLinks = page.locator("[data-related-story]");
+    const relatedHrefs = await relatedLinks.evaluateAll((items) => items.map((item) => item.getAttribute("href")));
+    expect(relatedHrefs).not.toContain(route);
+    expect(relatedHrefs).not.toContain("/flight-93/");
     await expect(page.getByText("original AI-assisted chibi artwork", { exact: false })).toHaveCount(0);
     themes.add(await page.locator("body").getAttribute("class"));
     const hasHorizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
     expect(hasHorizontalOverflow).toBe(false);
+    if (process.env.CAPTURE_QA && route === "/stories/lexington-and-concord/") {
+      await page.locator(".related-stories").screenshot({ path: `test-results/related-stories-${testInfo.project.name}.png` });
+    }
   }
   expect(themes.size).toBe(10);
 });

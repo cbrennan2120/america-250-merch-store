@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { productDesigns, products, quizQuestions, stories, timeline } from "../src/data/content.js";
+import { storyTopicGroups } from "../src/data/story-manifest.js";
 
 const root = resolve(import.meta.dirname, "..");
 const errors = [];
@@ -29,10 +30,11 @@ if (productDesigns.length !== 3 || !unique(productDesigns.map(({ id }) => id))) 
 if (!unique(products.map(({ displayName }) => displayName))) errors.push("Product display names must be unique.");
 const designIds = new Set(productDesigns.map(({ id }) => id));
 for (const product of products) {
-  for (const key of ["id", "slug", "href", "designId", "designName", "displayName", "name", "category", "priceLabel", "image", "alt", "description", "seoTitle", "metaDescription", "longDescription", "specifications", "materials", "careInstructions", "sizesOrDimensions", "shippingSummary", "returnSummary", "primaryImage", "galleryImages", "analyticsLabel", "availability", "relatedStorySlugs"]) {
+  for (const key of ["id", "slug", "href", "designId", "designName", "displayName", "name", "category", "priceLabel", "image", "alt", "description", "seoTitle", "metaDescription", "longDescription", "specifications", "materials", "careInstructions", "sizesOrDimensions", "shippingSummary", "returnSummary", "primaryImage", "galleryImages", "analyticsLabel", "availability", "modifiedDate", "relatedStorySlugs"]) {
     if (!product[key]) errors.push(`Product ${product.id || "unknown"} is missing ${key}.`);
   }
   if (product.slug !== product.id || product.href !== `/shop/${product.slug}/`) errors.push(`Product ${product.id} must use its stable internal product route.`);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(product.modifiedDate)) errors.push(`Product ${product.id} has an invalid modification date.`);
   if (product.galleryImages?.length < 3) errors.push(`Product ${product.id} needs at least three gallery images.`);
   for (const galleryImage of product.galleryImages ?? []) {
     if (!galleryImage.src || !galleryImage.srcSet || !galleryImage.alt) errors.push(`Product ${product.id} has incomplete gallery image data.`);
@@ -53,14 +55,20 @@ for (const design of productDesigns) {
 }
 
 if (stories.length !== 10 || !unique(stories.map(({ slug }) => slug))) errors.push("Stories must contain ten unique slugs.");
+const topicGroupIds = new Set(storyTopicGroups.map(({ id }) => id));
+if (storyTopicGroups.length !== 4 || topicGroupIds.size !== 4) errors.push("Story discovery must define four unique topic groups.");
 for (const story of stories) {
   if (!story.href?.startsWith("/stories/")) errors.push(`Story ${story.slug} must use a permanent /stories/ route.`);
-  for (const key of ["publishedDate", "modifiedDate", "seoTitle", "metaDescription", "primaryImage", "imageAlt", "topics"]) {
+  for (const key of ["publishedDate", "modifiedDate", "seoTitle", "metaDescription", "primaryImage", "imageAlt", "topics", "linkLabel", "topicGroupIds"]) {
     if (!story[key] || (Array.isArray(story[key]) && !story[key].length)) errors.push(`Story ${story.slug} is missing ${key}.`);
   }
   if (!/^\d{4}-\d{2}-\d{2}$/.test(story.publishedDate) || !/^\d{4}-\d{2}-\d{2}$/.test(story.modifiedDate)) errors.push(`Story ${story.slug} has an invalid publication or review date.`);
   if (story.modifiedDate < story.publishedDate) errors.push(`Story ${story.slug} is modified before it was published.`);
   if (!existsSync(resolve(root, "public", story.primaryImage.replace(/^\//, "")))) errors.push(`Story ${story.slug} is missing its primary image.`);
+  if (story.linkLabel === "Read this story" || story.linkLabel.length < 35) errors.push(`Story ${story.slug} needs a descriptive internal-link label.`);
+  if (story.topicGroupIds.some((id) => !topicGroupIds.has(id))) errors.push(`Story ${story.slug} references an unknown topic group.`);
+  const relatedCount = stories.filter((candidate) => candidate.slug !== story.slug && candidate.topicGroupIds.some((id) => story.topicGroupIds.includes(id))).length;
+  if (relatedCount < 3) errors.push(`Story ${story.slug} needs at least three topic-related stories.`);
   if (story.sources?.length && story.sources.some((source) => !approvedSource(source))) errors.push(`Story ${story.slug} has a non-institutional source.`);
 }
 

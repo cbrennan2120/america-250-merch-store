@@ -1,3 +1,53 @@
+export const storyTopicGroups = [
+  { id: "founding-government", name: "Founding and constitutional government" },
+  { id: "expanding-citizenship", name: "Expanding the definition of citizenship" },
+  { id: "resistance-coercion", name: "Resistance to coercive power" },
+  { id: "accountability-rule-law", name: "Accountability and the rule of law" }
+];
+
+const storyDiscovery = {
+  "lexington-and-concord": {
+    linkLabel: "Read how Lexington and Concord turned a weapons search into war",
+    topicGroupIds: ["resistance-coercion", "founding-government"]
+  },
+  "declaration-of-independence": {
+    linkLabel: "Read why the Declaration grounded government power in consent",
+    topicGroupIds: ["founding-government", "resistance-coercion"]
+  },
+  "washington-surrenders-command": {
+    linkLabel: "Read why Washington surrendered military authority",
+    topicGroupIds: ["founding-government", "accountability-rule-law"]
+  },
+  "bill-of-rights": {
+    linkLabel: "Read how the Bill of Rights limits federal power",
+    topicGroupIds: ["founding-government", "accountability-rule-law"]
+  },
+  "underground-railroad": {
+    linkLabel: "Read how freedom seekers resisted legalized slavery",
+    topicGroupIds: ["expanding-citizenship", "resistance-coercion"]
+  },
+  "womens-suffrage": {
+    linkLabel: "Read how suffragists expanded political self-government",
+    topicGroupIds: ["expanding-citizenship"]
+  },
+  "union-soldiers-and-emancipation": {
+    linkLabel: "Read how emancipation transformed the Civil War",
+    topicGroupIds: ["expanding-citizenship", "resistance-coercion"]
+  },
+  "d-day-and-the-fight-against-fascism": {
+    linkLabel: "Read how D-Day opened a foothold against fascism",
+    topicGroupIds: ["resistance-coercion"]
+  },
+  "civil-rights-movement": {
+    linkLabel: "Read how families and organizers challenged segregation",
+    topicGroupIds: ["expanding-citizenship", "accountability-rule-law"]
+  },
+  "watergate-accountability": {
+    linkLabel: "Read how Watergate proved presidents answer to the law",
+    topicGroupIds: ["accountability-rule-law"]
+  }
+};
+
 export const stories = [
   {
     slug: "lexington-and-concord",
@@ -201,6 +251,7 @@ export const stories = [
   }
 ].map((story) => ({
   ...story,
+  ...storyDiscovery[story.slug],
   href: `/stories/${story.slug}/`,
   sourceFile: `content/stories/${story.slug}/story.md`
 }));
