@@ -1,7 +1,7 @@
 import { access, mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { products } from "../src/data/content.js";
-import { stories as manifest } from "../src/data/story-manifest.js";
+import { stories as manifest, storyTopicGroups } from "../src/data/story-manifest.js";
 import { ORIGIN, baseGraph, breadcrumbSchema, creatorId, jsonLd, organizationId } from "./lib/static-content.mjs";
 
 const root = resolve(import.meta.dirname, "..");
@@ -171,12 +171,32 @@ function sourcesDrawer(story) {
   return `<details class="source-drawer"><summary>Sources, image captions, and editorial notes</summary><div class="source-drawer__body"><ul>${story.sources.map((source) => `<li>${inlineMarkdown(source)}</li>`).join("")}</ul>${story.notes.map((note) => `<p>${inlineMarkdown(note)}</p>`).join("")}<p><a href="/about/#artwork">How the artwork is made</a></p></div></details>`;
 }
 
+function relatedStoriesBlock(story, collection) {
+  const groupNames = new Map(storyTopicGroups.map((group) => [group.id, group.name]));
+  const storyIndex = collection.findIndex((candidate) => candidate.slug === story.slug);
+  const related = collection
+    .map((candidate, candidateIndex) => ({
+      story: candidate,
+      distance: Math.abs(candidateIndex - storyIndex),
+      sharedGroups: candidate.topicGroupIds.filter((id) => story.topicGroupIds.includes(id))
+    }))
+    .filter((candidate) => candidate.story.slug !== story.slug && candidate.sharedGroups.length)
+    .sort((a, b) => b.sharedGroups.length - a.sharedGroups.length || a.distance - b.distance)
+    .slice(0, 3);
+
+  return `<aside class="related-stories" aria-labelledby="related-stories-heading">
+    <div class="related-stories__heading"><p class="eyebrow">Follow the idea</p><h2 id="related-stories-heading">Related stories</h2><p>Continue through moments connected by the same questions about liberty, power, citizenship, and law.</p></div>
+    <div class="related-stories__grid">${related.map(({ story: candidate, sharedGroups }) => `<article class="related-story-card"><p class="related-story-card__topic">${sharedGroups.map((id) => escapeHtml(groupNames.get(id))).join(" · ")}</p><h3>${escapeHtml(candidate.title)}</h3><p>${escapeHtml(candidate.summary)}</p><a href="${candidate.href}" data-related-story="${candidate.slug}">${escapeHtml(candidate.linkLabel)} <span aria-hidden="true">→</span></a></article>`).join("")}</div>
+  </aside>`;
+}
+
 function storyPage(story, index, collection) {
   const previous = collection[(index - 1 + collection.length) % collection.length];
   const next = collection[(index + 1) % collection.length];
   const canonical = `https://spiritof1776.store/stories/${story.slug}/`;
   const crumbs = [{ name: "Home", href: "/" }, { name: "Stories", href: "/stories/" }, { name: story.title, href: story.href }];
   const merchandise = merchCallout(story);
+  const relatedStories = relatedStoriesBlock(story, collection);
   const chapters = story.sections.map((section, sectionIndex) => {
     const figure = section.image ? `<figure class="story-chapter__figure">${responsiveImage(story, section.image, section.alt)}<figcaption>${presentationCaption(section.caption)}</figcaption></figure>` : "";
     return `<section class="story-chapter" aria-labelledby="chapter-${sectionIndex + 1}">
@@ -217,7 +237,7 @@ function storyPage(story, index, collection) {
       </header>
       <div class="story-body">${chapters}</div>
       <div data-story-complete></div>
-      ${sourcesDrawer(story)}${merchandise ? `
+      ${sourcesDrawer(story)}${relatedStories}${merchandise ? `
       ${merchandise}` : ""}
     </article>
     <nav class="story-nav" aria-label="Browse stories"><a href="/stories/${previous.slug}/"><span>Previous</span><strong>${escapeHtml(previous.title)}</strong></a><a href="/stories/${next.slug}/"><span>Next</span><strong>${escapeHtml(next.title)}</strong></a></nav>
@@ -232,7 +252,7 @@ function storyPage(story, index, collection) {
 
 function storyCard(story, index) {
   const previews = story.sections.slice(0, 3).map((section) => `<img src="${imageBase(story, section.image)}-768.webp" alt="" loading="lazy" decoding="async">`).join("");
-  return `<article class="story-card story-card--${story.theme}" id="story-${story.slug}" data-era="${escapeHtml(story.era)}"><a class="story-card__preview" href="/stories/${story.slug}/" aria-label="Preview ${escapeHtml(story.title)}"><span class="story-card__number" aria-hidden="true">${String(index + 1).padStart(2, "0")}</span>${previews}</a><div class="story-card__body"><div class="story-card__meta"><span>${escapeHtml(story.era)}</span><span>${story.readMinutes} min read</span></div><p class="story-card__format">${escapeHtml(story.format)}</p><h2>${escapeHtml(story.title)}</h2><p class="story-card__subtitle">${escapeHtml(story.subtitle)}</p><p>${escapeHtml(story.summary)}</p><a class="story-card__action" href="/stories/${story.slug}/" data-story-link="${story.slug}">Read this story <span aria-hidden="true">→</span></a></div></article>`;
+  return `<article class="story-card story-card--${story.theme}" id="story-${story.slug}" data-era="${escapeHtml(story.era)}"><a class="story-card__preview" href="/stories/${story.slug}/" aria-label="Preview ${escapeHtml(story.title)}"><span class="story-card__number" aria-hidden="true">${String(index + 1).padStart(2, "0")}</span>${previews}</a><div class="story-card__body"><div class="story-card__meta"><span>${escapeHtml(story.era)}</span><span>${story.readMinutes} min read</span></div><p class="story-card__format">${escapeHtml(story.format)}</p><h2>${escapeHtml(story.title)}</h2><p class="story-card__subtitle">${escapeHtml(story.subtitle)}</p><p>${escapeHtml(story.summary)}</p><a class="story-card__action" href="/stories/${story.slug}/" data-story-link="${story.slug}">${escapeHtml(story.linkLabel)} <span aria-hidden="true">→</span></a></div></article>`;
 }
 
 function hubPage(stories) {
