@@ -1,6 +1,7 @@
 import { access, mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { products } from "../src/data/content.js";
+import { pageSeo } from "../src/data/page-seo.js";
 import { stories as manifest, storyTopicGroups } from "../src/data/story-manifest.js";
 import { ORIGIN, baseGraph, breadcrumbSchema, creatorId, jsonLd, organizationId } from "./lib/static-content.mjs";
 
@@ -257,17 +258,18 @@ function storyCard(story, index) {
 
 function hubPage(stories) {
   const crumbs = [{ name: "Home", href: "/" }, { name: "Stories", href: "/stories/" }];
+  const seo = pageSeo.stories;
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#13263d">
-  <meta name="description" content="Ten illustrated Spirit of 1776 stories about liberty, accountability, and America's unfinished promises.">
-  ${socialMeta({ type: "website", title: "Stories | Spirit of 1776", description: "Ten illustrated, sourced American-history stories.", url: "https://spiritof1776.store/stories/", image: "https://spiritof1776.store/assets/brand/social-card.png", imageAlt: "Spirit of 1776 illustrated American-history stories" })}
+  <meta name="description" content="${escapeHtml(seo.description)}">
+  ${socialMeta({ type: "website", title: seo.title, description: seo.description, url: `https://spiritof1776.store${seo.route}`, image: "https://spiritof1776.store/assets/brand/social-card.png", imageAlt: "Spirit of 1776 illustrated American-history stories" })}
   <link rel="canonical" href="https://spiritof1776.store/stories/">
   ${iconLinks()}
   ${jsonLd([...baseGraph(), breadcrumbSchema(crumbs)])}
-  <title>Stories | Spirit of 1776</title>
+  <title>${escapeHtml(seo.title)}</title>
 </head>
 <body class="preview-index">
   ${header()}

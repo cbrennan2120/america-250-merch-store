@@ -1,20 +1,14 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { products } from "../src/data/content.js";
+import { pageSeo } from "../src/data/page-seo.js";
 import { stories } from "../src/data/story-manifest.js";
 
 const root = resolve(import.meta.dirname, "..");
 const dist = resolve(root, "dist");
 const origin = "https://spiritof1776.store";
 const staticLastmod = {
-  "/": "2026-09-12",
-  "/stories/": "2026-09-12",
-  "/timeline/": "2026-09-11",
-  "/quiz/": "2026-09-11",
-  "/shop/": "2026-09-12",
-  "/about/": "2026-09-12",
-  "/privacy/": "2026-09-12",
-  "/flight-93/": "2026-09-11"
+  ...Object.fromEntries(Object.values(pageSeo).map((page) => [page.route, page.modifiedDate]))
 };
 
 const xmlEscape = (value = "") => String(value)
