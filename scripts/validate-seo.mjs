@@ -3,21 +3,22 @@ import { resolve } from "node:path";
 import sharp from "sharp";
 import { stories } from "../src/data/story-manifest.js";
 import { products } from "../src/data/content.js";
+import { pageSeo } from "../src/data/page-seo.js";
 
 const root = resolve(import.meta.dirname, "..");
 const origin = "https://spiritof1776.store";
 const errors = [];
 const pages = [
-  { file: "index.html", route: "/" },
-  { file: "stories/index.html", route: "/stories/" },
-  ...stories.map(({ slug }) => ({ file: `stories/${slug}/index.html`, route: `/stories/${slug}/` })),
-  { file: "timeline/index.html", route: "/timeline/" },
-  { file: "quiz/index.html", route: "/quiz/" },
-  { file: "shop/index.html", route: "/shop/" },
-  ...products.map(({ slug }) => ({ file: `shop/${slug}/index.html`, route: `/shop/${slug}/` })),
-  { file: "about/index.html", route: "/about/" },
-  { file: "privacy/index.html", route: "/privacy/" },
-  { file: "flight-93/index.html", route: "/flight-93/" }
+  { ...pageSeo.home, file: pageSeo.home.path },
+  { ...pageSeo.stories, file: pageSeo.stories.path },
+  ...stories.map((story) => ({ file: `stories/${story.slug}/index.html`, route: story.href, title: story.seoTitle, description: story.metaDescription })),
+  { ...pageSeo.timeline, file: pageSeo.timeline.path },
+  { ...pageSeo.quiz, file: pageSeo.quiz.path },
+  { ...pageSeo.shop, file: pageSeo.shop.path },
+  ...products.map((product) => ({ file: `shop/${product.slug}/index.html`, route: product.href, title: product.seoTitle, description: product.metaDescription })),
+  { ...pageSeo.about, file: pageSeo.about.path },
+  { ...pageSeo.privacy, file: pageSeo.privacy.path },
+  { ...pageSeo.flight93, file: pageSeo.flight93.path }
 ];
 
 function escapeRegExp(value) {
@@ -38,12 +39,33 @@ function count(html, pattern) {
   return [...html.matchAll(pattern)].length;
 }
 
+function decodeHtml(value = "") {
+  return value
+    .replaceAll("&amp;", "&")
+    .replaceAll("&quot;", '"')
+    .replaceAll("&#39;", "'")
+    .replaceAll("&apos;", "'");
+}
+
 const requiredProperties = ["og:type", "og:site_name", "og:title", "og:description", "og:url", "og:image", "og:image:alt"];
 const requiredNames = ["description", "theme-color", "twitter:card", "twitter:title", "twitter:description", "twitter:image", "twitter:image:alt"];
 const canonicalUrls = new Set();
+const searchTitles = new Set();
+const searchDescriptions = new Set();
 
 for (const page of pages) {
   const html = readFileSync(resolve(root, page.file), "utf8");
+  const title = decodeHtml(html.match(/<title>([^<]+)<\/title>/i)?.[1] ?? "");
+  const description = decodeHtml(metaContent(html, "name", "description"));
+  if (title !== page.title) errors.push(`${page.file} title must match its approved search title.`);
+  if (description !== page.description) errors.push(`${page.file} description must match its approved search description.`);
+  if (title.length < 45 || title.length > 70) errors.push(`${page.file} search title must be 45-70 characters; found ${title.length}.`);
+  if (description.length < 120 || description.length > 160) errors.push(`${page.file} search description must be 120-160 characters; found ${description.length}.`);
+  if (/\b(?:discover|explore|learn more)\b/i.test(description)) errors.push(`${page.file} search description uses a generic discovery phrase.`);
+  if (searchTitles.has(title)) errors.push(`${page.file} duplicates search title ${title}.`);
+  if (searchDescriptions.has(description)) errors.push(`${page.file} duplicates a search description.`);
+  searchTitles.add(title);
+  searchDescriptions.add(description);
   for (const property of requiredProperties) {
     const matches = count(html, new RegExp(`<meta[^>]+property="${escapeRegExp(property)}"`, "gi"));
     if (matches !== 1 || !metaContent(html, "property", property)) errors.push(`${page.file} must contain one populated ${property} tag.`);
@@ -59,6 +81,8 @@ for (const page of pages) {
   if (canonicalUrls.has(canonical)) errors.push(`${page.file} duplicates canonical ${canonical}.`);
   canonicalUrls.add(canonical);
   if (metaContent(html, "property", "og:url") !== canonical) errors.push(`${page.file} og:url must match its canonical.`);
+  if (decodeHtml(metaContent(html, "property", "og:title")) !== title || decodeHtml(metaContent(html, "name", "twitter:title")) !== title) errors.push(`${page.file} social titles must match its search title.`);
+  if (decodeHtml(metaContent(html, "property", "og:description")) !== description || decodeHtml(metaContent(html, "name", "twitter:description")) !== description) errors.push(`${page.file} social descriptions must match its search description.`);
   if (metaContent(html, "property", "og:site_name") !== "Spirit of 1776") errors.push(`${page.file} must identify the Open Graph site name.`);
   if (metaContent(html, "name", "twitter:card") !== "summary_large_image") errors.push(`${page.file} must use the large Twitter card.`);
   if (metaContent(html, "name", "twitter:image") !== metaContent(html, "property", "og:image")) errors.push(`${page.file} social image tags must agree.`);

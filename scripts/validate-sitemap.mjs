@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { products } from "../src/data/content.js";
+import { pageSeo } from "../src/data/page-seo.js";
 import { stories } from "../src/data/story-manifest.js";
 
 const root = resolve(import.meta.dirname, "..");
@@ -38,7 +39,7 @@ for (const product of products) {
 }
 
 const flightBlock = blockFor("/flight-93/");
-if (!flightBlock.includes("<lastmod>2026-09-11</lastmod>")) errors.push("Flight 93 must retain its stable sitemap modification date.");
+if (!flightBlock.includes(`<lastmod>${pageSeo.flight93.modifiedDate}</lastmod>`)) errors.push("Flight 93 must use its explicit sitemap modification date.");
 
 for (const block of urlBlocks) {
   if (!/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/.test(block)) errors.push("Every sitemap URL needs an explicit stable lastmod.");
