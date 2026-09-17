@@ -7,7 +7,7 @@ export const escapeHtml = (value = "") => String(value)
   .replaceAll('"', "&quot;");
 
 export function renderProductCard(product, headingLevel = 3) {
-  const target = product.productUrl || product.storeUrl;
+  const target = product.href;
   return `<article class="product-card" id="${escapeHtml(product.id)}">
       <picture>${product.imageAvif ? `<source srcset="${escapeHtml(product.imageAvif)}" type="image/avif">` : ""}<img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.alt)}" width="1200" height="1000" loading="lazy"></picture>
       <div class="product-card__body">
@@ -16,7 +16,7 @@ export function renderProductCard(product, headingLevel = 3) {
         <p>${escapeHtml(product.description)}</p>
         <p class="product-price">${escapeHtml(product.priceLabel)}</p>
         <p class="product-status">Available now</p>
-        <a class="button button--secondary" href="${escapeHtml(target)}" target="_blank" rel="noopener" data-product-link="${escapeHtml(product.analyticsLabel)}">View product<span aria-hidden="true"> ↗</span></a>
+        <a class="button button--secondary" href="${escapeHtml(target)}" data-product-card="${escapeHtml(product.analyticsLabel)}">View details<span aria-hidden="true"> →</span></a>
       </div>
     </article>`;
 }
@@ -73,11 +73,11 @@ export function breadcrumbSchema(items) {
 export function productSchemas(products) {
   return products.map((product) => ({
     "@type": "Product",
-    "@id": `${ORIGIN}/shop/#${product.id}`,
+    "@id": `${ORIGIN}${product.href}#product`,
     name: product.displayName,
     description: product.description,
-    image: `${ORIGIN}${product.image}`,
-    url: `${ORIGIN}/shop/#${product.id}`,
+    image: product.galleryImages.map((image) => `${ORIGIN}${image.src}`),
+    url: `${ORIGIN}${product.href}`,
     brand: { "@type": "Brand", name: "Spirit of 1776" },
     offers: {
       "@type": "Offer",

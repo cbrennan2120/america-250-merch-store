@@ -20,6 +20,7 @@ const routes = [
   { path: "/timeline/" },
   { path: "/quiz/" },
   { path: "/shop/", images: products.map((product) => ({ path: product.image, title: product.name })) },
+  ...products.map((product) => ({ path: product.href, images: [{ path: product.primaryImage, title: product.displayName }] })),
   { path: "/about/" },
   { path: "/privacy/" },
   {

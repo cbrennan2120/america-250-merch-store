@@ -29,8 +29,16 @@ if (productDesigns.length !== 3 || !unique(productDesigns.map(({ id }) => id))) 
 if (!unique(products.map(({ displayName }) => displayName))) errors.push("Product display names must be unique.");
 const designIds = new Set(productDesigns.map(({ id }) => id));
 for (const product of products) {
-  for (const key of ["id", "designId", "designName", "displayName", "name", "category", "priceLabel", "image", "alt", "description", "analyticsLabel", "availability"]) {
+  for (const key of ["id", "slug", "href", "designId", "designName", "displayName", "name", "category", "priceLabel", "image", "alt", "description", "seoTitle", "metaDescription", "longDescription", "specifications", "materials", "careInstructions", "sizesOrDimensions", "shippingSummary", "returnSummary", "primaryImage", "galleryImages", "analyticsLabel", "availability", "relatedStorySlugs"]) {
     if (!product[key]) errors.push(`Product ${product.id || "unknown"} is missing ${key}.`);
+  }
+  if (product.slug !== product.id || product.href !== `/shop/${product.slug}/`) errors.push(`Product ${product.id} must use its stable internal product route.`);
+  if (product.galleryImages?.length < 3) errors.push(`Product ${product.id} needs at least three gallery images.`);
+  for (const galleryImage of product.galleryImages ?? []) {
+    if (!galleryImage.src || !galleryImage.srcSet || !galleryImage.alt) errors.push(`Product ${product.id} has incomplete gallery image data.`);
+    for (const reference of [galleryImage.src, ...galleryImage.srcSet.split(", ").map((entry) => entry.split(" ")[0])]) {
+      if (!existsSync(resolve(root, "public", reference.replace(/^\//, "")))) errors.push(`Missing product gallery asset ${reference}.`);
+    }
   }
   if (!designIds.has(product.designId)) errors.push(`Product ${product.id} has an unknown design ID.`);
   for (const file of [product.image]) {

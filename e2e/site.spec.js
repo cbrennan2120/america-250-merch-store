@@ -21,11 +21,18 @@ test("homepage and shop expose all products when JavaScript is disabled", async 
   const page = await context.newPage();
   await page.goto("/");
   await expect(page.locator(".product-card")).toHaveCount(6);
-  await expect(page.locator('[data-product-link]')).toHaveCount(6);
+  await expect(page.locator('.product-card a[href^="/shop/"]')).toHaveCount(6);
   await page.goto("/shop/");
   await expect(page.locator(".product-design-group")).toHaveCount(3);
   await expect(page.locator(".product-card")).toHaveCount(6);
-  await expect(page.locator('[data-product-link]')).toHaveCount(6);
+  await expect(page.locator('.product-card a[href^="/shop/"]')).toHaveCount(6);
+  const productLinks = await page.locator('.product-card a[href^="/shop/"]').evaluateAll((items) => items.map((item) => item.getAttribute("href")));
+  for (const route of productLinks) {
+    await page.goto(route);
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    await expect(page.locator(".product-gallery__item")).toHaveCount(3);
+    await expect(page.locator("[data-product-link]")).toBeVisible();
+  }
   await context.close();
 });
 
@@ -63,19 +70,29 @@ test("quiz can be completed, explained, shared, and retried", async ({ page }) =
   await expect(page.locator("[data-quiz-result]")).toBeHidden();
 });
 
-test("live products link to their product-specific Printify pages", async ({ page }, testInfo) => {
+const productRoutes = [
+  ["/shop/currently-revolting-tee/", "https://shop.spiritof1776.store/product/31839516"],
+  ["/shop/currently-revolting-sticker/", "https://shop.spiritof1776.store/product/31839757"],
+  ["/shop/give-me-a-minute-crewneck/", "https://shop.spiritof1776.store/product/31839649"],
+  ["/shop/give-me-a-minute-sticker/", "https://shop.spiritof1776.store/product/31839795"],
+  ["/shop/liber-tea-mug/", "https://shop.spiritof1776.store/product/31845608"],
+  ["/shop/liber-tea-sticker/", "https://shop.spiritof1776.store/product/31839925"]
+];
+
+test("Shop links to six internal product pages with matching Printify checkout links", async ({ page }, testInfo) => {
   await page.goto("/shop/");
   await expect(page.locator(".product-design-group")).toHaveCount(3);
   await expect(page.locator(".product-card")).toHaveCount(6);
   await expect(page.getByText("Available now")).toHaveCount(6);
-  const links = page.locator("[data-product-link]");
+  const links = page.locator('.product-card a[href^="/shop/"]');
   await expect(links).toHaveCount(6);
-  await expect(links.nth(0)).toHaveAttribute("href", "https://shop.spiritof1776.store/product/31839516");
-  await expect(links.nth(1)).toHaveAttribute("href", "https://shop.spiritof1776.store/product/31839757");
-  await expect(links.nth(2)).toHaveAttribute("href", "https://shop.spiritof1776.store/product/31839649");
-  await expect(links.nth(3)).toHaveAttribute("href", "https://shop.spiritof1776.store/product/31839795");
-  await expect(links.nth(4)).toHaveAttribute("href", "https://shop.spiritof1776.store/product/31845608");
-  await expect(links.nth(5)).toHaveAttribute("href", "https://shop.spiritof1776.store/product/31839925");
+  expect(await links.evaluateAll((items) => items.map((item) => item.getAttribute("href")))).toEqual(productRoutes.map(([route]) => route));
+  for (const [route, checkout] of productRoutes) {
+    await page.goto(route);
+    await expect(page.locator(".product-gallery__item")).toHaveCount(3);
+    await expect(page.locator("[data-product-link]")).toHaveAttribute("href", checkout);
+    await expect(page.getByText("Made to order", { exact: false })).not.toHaveCount(0);
+  }
   if (process.env.CAPTURE_QA) {
     await page.screenshot({ path: `test-results/shop-${testInfo.project.name}.png`, fullPage: true });
   }

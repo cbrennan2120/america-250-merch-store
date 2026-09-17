@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { stories } from "../src/data/story-manifest.js";
+import { products } from "../src/data/content.js";
 
 const root = resolve(import.meta.dirname, "..");
 const htmlFiles = [
@@ -12,6 +13,7 @@ const htmlFiles = [
   "timeline/index.html",
   "quiz/index.html",
   "shop/index.html",
+  ...products.map((product) => `shop/${product.slug}/index.html`),
   "about/index.html",
   "privacy/index.html",
   "flight-93/index.html"

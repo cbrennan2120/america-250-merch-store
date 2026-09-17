@@ -1,7 +1,9 @@
-import { readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { productDesigns, products } from "../src/data/content.js";
 import { baseGraph, jsonLd, productSchemas, renderProductGrid } from "./lib/static-content.mjs";
+import { productPage } from "./lib/product-page.mjs";
+import { stories } from "../src/data/story-manifest.js";
 
 const root = resolve(import.meta.dirname, "..");
 
@@ -35,4 +37,10 @@ for (const page of ["about/index.html", "privacy/index.html", "timeline/index.ht
   await update(page, (html) => replaceManagedBlock(html, "structured-data", jsonLd(baseGraph())));
 }
 
-console.log("Rendered crawler-visible product cards and static structured data.");
+for (const product of products) {
+  const target = resolve(root, "shop", product.slug);
+  await mkdir(target, { recursive: true });
+  await writeFile(resolve(target, "index.html"), productPage(product, products, stories), "utf8");
+}
+
+console.log(`Rendered crawler-visible content, static schema, and ${products.length} product pages.`);
