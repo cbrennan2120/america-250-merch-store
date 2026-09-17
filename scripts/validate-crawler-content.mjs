@@ -63,6 +63,7 @@ for (const product of products) {
 const hubHtml = read("stories/index.html");
 const hubGraph = graphFrom("stories/index.html");
 if (!hubHtml.includes('class="breadcrumbs"') || !hubGraph.some((node) => node["@type"] === "BreadcrumbList")) errors.push("Stories hub needs visible and structured breadcrumbs.");
+if (/Read (?:this|the) story/i.test(hubHtml) || /Read (?:this|the) story/i.test(read("index.html"))) errors.push("Homepage and Stories hub must use descriptive story-link anchors.");
 
 for (const story of stories) {
   const path = `stories/${story.slug}/index.html`;
@@ -71,6 +72,9 @@ for (const story of stories) {
   const article = graph.find((node) => node["@type"] === "Article");
   const breadcrumb = graph.find((node) => node["@type"] === "BreadcrumbList");
   if (!html.includes('class="breadcrumbs"') || !breadcrumb || breadcrumb.itemListElement?.length !== 3) errors.push(`${story.slug} needs visible and three-level structured breadcrumbs.`);
+  if ((html.match(/class="related-story-card"/g) || []).length !== 3) errors.push(`${story.slug} needs exactly three topic-related story cards.`);
+  if ((html.match(/data-related-story=/g) || []).length !== 3) errors.push(`${story.slug} related story cards need crawlable descriptive links.`);
+  if (html.includes(`data-related-story="${story.slug}"`)) errors.push(`${story.slug} must not link to itself as a related story.`);
   if (!html.includes('rel="author">Chris Brennan</a>') || !html.includes(`<time datetime="${story.publishedDate}">`) || !html.includes(`<time datetime="${story.modifiedDate}">`)) errors.push(`${story.slug} needs a visible creator and publication/review dates.`);
   if (!article) {
     errors.push(`${story.slug} is missing Article schema.`);
@@ -87,6 +91,18 @@ for (const story of stories) {
   if (article.author?.["@id"] !== "https://chrisbrennan.net/#person" || article.publisher?.["@id"] !== "https://spiritof1776.store/#organization") errors.push(`${story.slug} Article schema has incorrect author or publisher.`);
   if (article.mainEntityOfPage?.["@id"] !== `https://spiritof1776.store${story.href}`) errors.push(`${story.slug} Article schema has an incorrect canonical page.`);
   if (!Array.isArray(article.citation) || article.citation.length < 3) errors.push(`${story.slug} Article schema needs at least three source citations.`);
+  const relatedSlugs = [...html.matchAll(/data-related-story="([^"]+)"/g)].map((match) => match[1]);
+  if (relatedSlugs.length !== 3 || new Set(relatedSlugs).size !== 3) errors.push(`${story.slug} needs three unique related-story links.`);
+  if (relatedSlugs.includes(story.slug) || relatedSlugs.some((slug) => !stories.some((candidate) => candidate.slug === slug))) errors.push(`${story.slug} has an invalid related-story destination.`);
+}
+
+const pagesThatMustNotLinkFlight93 = [
+  "index.html", "stories/index.html", "shop/index.html", "about/index.html", "privacy/index.html", "timeline/index.html", "quiz/index.html",
+  ...stories.map(({ slug }) => `stories/${slug}/index.html`),
+  ...products.map(({ slug }) => `shop/${slug}/index.html`)
+];
+for (const path of pagesThatMustNotLinkFlight93) {
+  if (/href="\/flight-93\/?"/.test(read(path))) errors.push(`${path} must not link to the standalone Flight 93 page.`);
 }
 
 for (const path of ["about/index.html", "privacy/index.html", "timeline/index.html", "quiz/index.html"]) graphFrom(path);

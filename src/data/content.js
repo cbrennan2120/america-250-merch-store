@@ -52,6 +52,7 @@ export const products = [
     storeUrl: STORE_URL,
     analyticsLabel: "currently_revolting_tee",
     availability: "live",
+    modifiedDate: "2026-09-12",
     relatedStorySlugs: ["lexington-and-concord", "declaration-of-independence"]
   },
   {
@@ -86,6 +87,7 @@ export const products = [
     storeUrl: STORE_URL,
     analyticsLabel: "currently_revolting_sticker",
     availability: "live",
+    modifiedDate: "2026-09-12",
     relatedStorySlugs: ["lexington-and-concord", "declaration-of-independence"]
   },
   {
@@ -120,6 +122,7 @@ export const products = [
     storeUrl: STORE_URL,
     analyticsLabel: "give_me_a_minute_crewneck",
     availability: "live",
+    modifiedDate: "2026-09-12",
     relatedStorySlugs: ["lexington-and-concord"]
   },
   {
@@ -154,6 +157,7 @@ export const products = [
     storeUrl: STORE_URL,
     analyticsLabel: "give_me_a_minute_sticker",
     availability: "live",
+    modifiedDate: "2026-09-12",
     relatedStorySlugs: ["lexington-and-concord"]
   },
   {
@@ -188,6 +192,7 @@ export const products = [
     storeUrl: STORE_URL,
     analyticsLabel: "liber_tea_mug",
     availability: "live",
+    modifiedDate: "2026-09-12",
     relatedStorySlugs: ["declaration-of-independence"]
   },
   {
@@ -222,6 +227,7 @@ export const products = [
     storeUrl: STORE_URL,
     analyticsLabel: "liber_tea_sticker",
     availability: "live",
+    modifiedDate: "2026-09-12",
     relatedStorySlugs: ["declaration-of-independence"]
   }
 ];

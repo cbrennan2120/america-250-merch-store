@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { productDesigns, products, quizQuestions, stories, timeline } from "../src/data/content.js";
+import { storyTopicGroups } from "../src/data/story-manifest.js";
 
 describe("launch content", () => {
   it("keeps the approved launch counts", () => {
@@ -31,6 +32,24 @@ describe("launch content", () => {
       expect(product.href).toBe(`/shop/${product.slug}/`);
       expect(product.galleryImages).toHaveLength(3);
       expect(product.productUrl).toMatch(/^https:\/\/shop\.spiritof1776\.store\/product\/\d+$/);
+    }
+  });
+
+  it("connects every story through descriptive, topic-based discovery paths", () => {
+    expect(storyTopicGroups.map(({ id }) => id)).toEqual([
+      "founding-government",
+      "expanding-citizenship",
+      "resistance-coercion",
+      "accountability-rule-law"
+    ]);
+    for (const story of stories) {
+      expect(story.linkLabel.length).toBeGreaterThanOrEqual(35);
+      expect(story.linkLabel).not.toBe("Read this story");
+      const related = stories.filter((candidate) =>
+        candidate.slug !== story.slug
+        && candidate.topicGroupIds.some((id) => story.topicGroupIds.includes(id))
+      );
+      expect(related.length, story.slug).toBeGreaterThanOrEqual(3);
     }
   });
 });
