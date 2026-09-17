@@ -10,7 +10,14 @@ export const stories = [
     summary: "How alarms, uncertain choices, and community resistance turned a weapons search into open conflict.",
     merchandiseMode: "featured",
     relatedProductIds: ["give-me-a-minute-crewneck", "give-me-a-minute-sticker"],
-    socialImage: "/assets/stories/lexington-and-concord/01-the-alarm-spreads-1536.webp"
+    socialImage: "/assets/stories/lexington-and-concord/01-the-alarm-spreads-1536.webp",
+    publishedDate: "2026-09-10",
+    modifiedDate: "2026-09-12",
+    seoTitle: "Lexington and Concord | Spirit of 1776",
+    metaDescription: "How alarms, uncertain choices, and community resistance turned a weapons search into open conflict.",
+    primaryImage: "/assets/stories/lexington-and-concord/01-the-alarm-spreads-1536.webp",
+    imageAlt: "Under a full moon, Samuel Prescott gallops along a dirt road while neighbors pass the alarm between candlelit farmhouses and local militiamen gather their equipment.",
+    topics: ["founding era", "community resistance", "citizen soldiers"]
   },
   {
     slug: "declaration-of-independence",
@@ -23,7 +30,14 @@ export const stories = [
     summary: "Natural rights, public argument, and the revolutionary claim that government receives its power from the people.",
     merchandiseMode: "general",
     relatedProductIds: [],
-    socialImage: "/assets/stories/declaration-of-independence/01-drafting-the-idea-1536.webp"
+    socialImage: "/assets/stories/declaration-of-independence/01-drafting-the-idea-1536.webp",
+    publishedDate: "2026-09-10",
+    modifiedDate: "2026-09-12",
+    seoTitle: "The Declaration of Independence | Spirit of 1776",
+    metaDescription: "Natural rights, public argument, and the revolutionary claim that government receives its power from the people.",
+    primaryImage: "/assets/stories/declaration-of-independence/01-drafting-the-idea-1536.webp",
+    imageAlt: "Thomas Jefferson writes at a crowded wooden desk while John Adams gestures and Benjamin Franklin reviews the draft through round spectacles.",
+    topics: ["natural rights", "consent of the governed", "founding era"]
   },
   {
     slug: "washington-surrenders-command",
@@ -36,7 +50,14 @@ export const stories = [
     summary: "The victorious general returns his commission and demonstrates that military power belongs beneath civilian government.",
     merchandiseMode: "general",
     relatedProductIds: [],
-    socialImage: "/assets/stories/washington-surrenders-command/01-the-newburgh-choice-1536.webp"
+    socialImage: "/assets/stories/washington-surrenders-command/01-the-newburgh-choice-1536.webp",
+    publishedDate: "2026-09-10",
+    modifiedDate: "2026-09-12",
+    seoTitle: "Washington Surrenders Command | Spirit of 1776",
+    metaDescription: "The victorious general returns his commission and demonstrates that military power belongs beneath civilian government.",
+    primaryImage: "/assets/stories/washington-surrenders-command/01-the-newburgh-choice-1536.webp",
+    imageAlt: "George Washington stands with spectacles and a blank paper among angry, exhausted Continental officers in a plain wooden meeting hall.",
+    topics: ["civilian government", "military authority", "founding era"]
   },
   {
     slug: "bill-of-rights",
@@ -49,7 +70,14 @@ export const stories = [
     summary: "Promises become enforceable rules that tell the federal government what it must not do.",
     merchandiseMode: "general",
     relatedProductIds: [],
-    socialImage: "/assets/stories/bill-of-rights/01-a-constitution-without-rights-1536.webp"
+    socialImage: "/assets/stories/bill-of-rights/01-a-constitution-without-rights-1536.webp",
+    publishedDate: "2026-09-10",
+    modifiedDate: "2026-09-12",
+    seoTitle: "The Bill of Rights | Spirit of 1776",
+    metaDescription: "Promises become enforceable rules that tell the federal government what it must not do.",
+    primaryImage: "/assets/stories/bill-of-rights/01-a-constitution-without-rights-1536.webp",
+    imageAlt: "Delegates debate the Constitution while George Mason points to missing written protections and citizens watch from the gallery.",
+    topics: ["Bill of Rights", "constitutional rights", "limited government"]
   },
   {
     slug: "underground-railroad",
@@ -62,11 +90,18 @@ export const stories = [
     summary: "Freedom seekers led their own resistance to legalized oppression, aided by courageous networks of people and places.",
     merchandiseMode: "none",
     relatedProductIds: [],
-    socialImage: "/assets/stories/underground-railroad/01-choosing-freedom-1536.webp"
+    socialImage: "/assets/stories/underground-railroad/01-choosing-freedom-1536.webp",
+    publishedDate: "2026-09-10",
+    modifiedDate: "2026-09-12",
+    seoTitle: "The Underground Railroad | Spirit of 1776",
+    metaDescription: "Freedom seekers led their own resistance to legalized oppression, aided by courageous networks of people and places.",
+    primaryImage: "/assets/stories/underground-railroad/01-choosing-freedom-1536.webp",
+    imageAlt: "Harriet Tubman pauses at the edge of a moonlit Maryland wood while loved ones remain near a distant cabin.",
+    topics: ["Underground Railroad", "freedom seekers", "resistance to slavery"]
   },
   {
     slug: "womens-suffrage",
-    title: "Women’s Suffrage",
+    title: "Women's Suffrage",
     subtitle: "Who Counts as the People?",
     era: "1848–1920",
     format: "Campaign scrapbook",
@@ -75,7 +110,14 @@ export const stories = [
     summary: "Generations of organizers forced the nation to expand the meaning of political self-government.",
     merchandiseMode: "none",
     relatedProductIds: [],
-    socialImage: "/assets/stories/womens-suffrage/01-a-declaration-becomes-a-demand-1536.webp"
+    socialImage: "/assets/stories/womens-suffrage/01-a-declaration-becomes-a-demand-1536.webp",
+    publishedDate: "2026-09-10",
+    modifiedDate: "2026-09-12",
+    seoTitle: "Women’s Suffrage | Spirit of 1776",
+    metaDescription: "Generations of organizers forced the nation to expand the meaning of political self-government.",
+    primaryImage: "/assets/stories/womens-suffrage/01-a-declaration-becomes-a-demand-1536.webp",
+    imageAlt: "Elizabeth Cady Stanton reads a declaration in the Seneca Falls chapel while Lucretia Mott, Frederick Douglass, and the audience debate voting rights.",
+    topics: ["women's suffrage", "voting rights", "self-government"]
   },
   {
     slug: "union-soldiers-and-emancipation",
@@ -88,7 +130,14 @@ export const stories = [
     summary: "Enslaved people and Black soldiers helped transform a war for Union into a war that destroyed slavery.",
     merchandiseMode: "none",
     relatedProductIds: [],
-    socialImage: "/assets/stories/union-soldiers-and-emancipation/01-freedom-reaches-union-lines-1536.webp"
+    socialImage: "/assets/stories/union-soldiers-and-emancipation/01-freedom-reaches-union-lines-1536.webp",
+    publishedDate: "2026-09-10",
+    modifiedDate: "2026-09-12",
+    seoTitle: "Union Soldiers and Emancipation | Spirit of 1776",
+    metaDescription: "Enslaved people and Black soldiers helped transform a war for Union into a war that destroyed slavery.",
+    primaryImage: "/assets/stories/union-soldiers-and-emancipation/01-freedom-reaches-union-lines-1536.webp",
+    imageAlt: "Frank Baker, Shepard Mallory, and James Townsend stand resolutely at Fort Monroe's gate while Union officers confront their arrival.",
+    topics: ["emancipation", "Civil War", "Black soldiers"]
   },
   {
     slug: "d-day-and-the-fight-against-fascism",
@@ -101,7 +150,14 @@ export const stories = [
     summary: "A vast coalition accepted terrible risk to open a foothold against Nazi occupation and totalitarian rule.",
     merchandiseMode: "none",
     relatedProductIds: [],
-    socialImage: "/assets/stories/d-day-and-the-fight-against-fascism/01-occupation-and-resistance-1536.webp"
+    socialImage: "/assets/stories/d-day-and-the-fight-against-fascism/01-occupation-and-resistance-1536.webp",
+    publishedDate: "2026-09-10",
+    modifiedDate: "2026-09-12",
+    seoTitle: "D-Day and the Fight Against Fascism | Spirit of 1776",
+    metaDescription: "A vast coalition accepted terrible risk to open a foothold against Nazi occupation and totalitarian rule.",
+    primaryImage: "/assets/stories/d-day-and-the-fight-against-fascism/01-occupation-and-resistance-1536.webp",
+    imageAlt: "In occupied Normandy, French civilians quietly listen to a hidden radio while a German patrol moves along the road outside.",
+    topics: ["D-Day", "World War II", "resistance to fascism"]
   },
   {
     slug: "civil-rights-movement",
@@ -114,7 +170,14 @@ export const stories = [
     summary: "Families, organizers, students, and marchers compelled America to honor promises it had long denied.",
     merchandiseMode: "none",
     relatedProductIds: [],
-    socialImage: "/assets/stories/civil-rights-movement/01-families-take-segregation-to-court-1536.webp"
+    socialImage: "/assets/stories/civil-rights-movement/01-families-take-segregation-to-court-1536.webp",
+    publishedDate: "2026-09-10",
+    modifiedDate: "2026-09-12",
+    seoTitle: "The Civil Rights Movement | Spirit of 1776",
+    metaDescription: "Families, organizers, students, and marchers compelled America to honor promises it had long denied.",
+    primaryImage: "/assets/stories/civil-rights-movement/01-families-take-segregation-to-court-1536.webp",
+    imageAlt: "Black parents, children, local organizers, and NAACP lawyers prepare case files outside a segregated school.",
+    topics: ["civil rights movement", "equal protection", "voting rights"]
   },
   {
     slug: "watergate-accountability",
@@ -127,7 +190,14 @@ export const stories = [
     summary: "Investigators, courts, Congress, and the public proved that no president stands beyond the reach of law.",
     merchandiseMode: "none",
     relatedProductIds: [],
-    socialImage: "/assets/stories/watergate-accountability/01-a-piece-of-tape-1536.webp"
+    socialImage: "/assets/stories/watergate-accountability/01-a-piece-of-tape-1536.webp",
+    publishedDate: "2026-09-10",
+    modifiedDate: "2026-09-12",
+    seoTitle: "Watergate Accountability | Spirit of 1776",
+    metaDescription: "Investigators, courts, Congress, and the public proved that no president stands beyond the reach of law.",
+    primaryImage: "/assets/stories/watergate-accountability/01-a-piece-of-tape-1536.webp",
+    imageAlt: "Security guard Frank Wills examines tape on a Watergate door latch while plainclothes police quietly approach.",
+    topics: ["Watergate", "rule of law", "presidential accountability"]
   }
 ].map((story) => ({
   ...story,

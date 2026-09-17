@@ -114,11 +114,8 @@ export const products = [
 ];
 
 export const stories = storyManifest.map((story) => ({
-  slug: story.slug,
-  title: story.title,
+  ...story,
   eyebrow: story.era,
-  summary: story.summary,
-  href: story.href,
   sources: story.sources ?? []
 }));
 
