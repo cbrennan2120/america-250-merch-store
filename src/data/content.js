@@ -33,8 +33,8 @@ export const products = [
     image: "/assets/products/currently-revolting-tee.webp",
     alt: "Sticker-style chibi colonial patriot kicking over a tea crate with flying leaves",
     description: "A lightweight Gildan Softstyle unisex tee with a front DTG print of our tea-crate-kicking patriot. Adult sizes S-3XL in Dark Heather.",
-    seoTitle: "Currently Revolting Tee | Spirit of 1776",
-    metaDescription: "Shop the Currently Revolting chibi history tee in Dark Heather, available in adult sizes S–3XL and made to order.",
+    seoTitle: "Currently Revolting Chibi History T-Shirt | Spirit of 1776",
+    metaDescription: "Shop the Currently Revolting chibi history T-shirt in Dark Heather, a lightweight Gildan Softstyle tee made to order in adult sizes S–3XL.",
     longDescription: "Currently Revolting is for history fans who appreciate a good protest and a bad tea pun. A furious little patriot, flying tea leaves, and one doomed crate turn Revolutionary-era frustration into something worth wearing.",
     specifications: ["Gildan 64000 Softstyle unisex T-shirt", "Lightweight 4.5 oz/yd² fabric", "Classic crew neckline", "Ribbed collar and shoulder tape", "Front DTG print by Monster Digital"],
     materials: ["Dark Heather: 65% polyester and 35% ring-spun cotton"],
@@ -52,7 +52,7 @@ export const products = [
     storeUrl: STORE_URL,
     analyticsLabel: "currently_revolting_tee",
     availability: "live",
-    modifiedDate: "2026-09-12",
+    modifiedDate: "2026-09-15",
     relatedStorySlugs: ["lexington-and-concord", "declaration-of-independence"]
   },
   {
@@ -68,8 +68,8 @@ export const products = [
     image: "/assets/products/currently-revolting-sticker.webp",
     alt: "Die-cut chibi colonial patriot kicking over a wooden tea crate",
     description: "A four-inch die-cut sticker of our furious little patriot, ready for notebooks, bottles, and history kits.",
-    seoTitle: "Currently Revolting Sticker | Spirit of 1776",
-    metaDescription: "Shop the four-inch Currently Revolting matte die-cut vinyl sticker, made to order for history fans.",
+    seoTitle: "Currently Revolting Die-Cut Sticker | Spirit of 1776",
+    metaDescription: "Shop the four-inch Currently Revolting die-cut vinyl sticker, with a matte finish and tea-crate-kicking chibi patriot artwork made to order.",
     longDescription: "Currently Revolting turns a tea-crate tantrum into a small badge of Revolutionary-era mischief. Stick it somewhere that could use a little historical attitude.",
     specifications: stickerSpecifications,
     materials: ["Premium white vinyl", "Matte protective laminate"],
@@ -87,7 +87,7 @@ export const products = [
     storeUrl: STORE_URL,
     analyticsLabel: "currently_revolting_sticker",
     availability: "live",
-    modifiedDate: "2026-09-12",
+    modifiedDate: "2026-09-15",
     relatedStorySlugs: ["lexington-and-concord", "declaration-of-independence"]
   },
   {
@@ -103,8 +103,8 @@ export const products = [
     image: "/assets/products/give-me-a-minute-crewneck.webp",
     alt: "Frazzled chibi minuteman half dressed with one boot missing and a crooked tricorn hat",
     description: "A navy Gildan Heavy Blend crewneck starring a minuteman who is not quite ready, but is still showing up. Adult sizes S-3XL.",
-    seoTitle: "Give Me a Minute Crewneck | Spirit of 1776",
-    metaDescription: "Shop the Give Me a Minute chibi minuteman crewneck in Navy, available in adult sizes S–3XL and made to order.",
+    seoTitle: "Give Me a Minute Minuteman Crewneck | Spirit of 1776",
+    metaDescription: "Shop the Give Me a Minute chibi minuteman crewneck in Navy, a Gildan Heavy Blend sweatshirt made to order in adult sizes S–3XL.",
     longDescription: "Give Me a Minute is for everyone who has ever been called to action before finding the other boot. The frazzled minuteman brings a little chaos to a comfortable cold-weather layer.",
     specifications: ["Gildan 18000 Heavy Blend unisex crewneck", "8 oz/yd² fleece", "Classic fit", "Ribbed collar, cuffs, and waistband", "Front DTG print by Monster Digital"],
     materials: ["50% U.S. cotton and 50% polyester"],
@@ -122,7 +122,7 @@ export const products = [
     storeUrl: STORE_URL,
     analyticsLabel: "give_me_a_minute_crewneck",
     availability: "live",
-    modifiedDate: "2026-09-12",
+    modifiedDate: "2026-09-15",
     relatedStorySlugs: ["lexington-and-concord"]
   },
   {
@@ -138,8 +138,8 @@ export const products = [
     image: "/assets/products/give-me-a-minute-sticker.webp",
     alt: "Panicked chibi minuteman with one boot on, one boot missing, and a musket under his arm",
     description: "A four-inch die-cut sticker for anyone who has ever been called to action before finishing breakfast.",
-    seoTitle: "Give Me a Minute Sticker | Spirit of 1776",
-    metaDescription: "Shop the four-inch Give Me a Minute chibi minuteman matte die-cut vinyl sticker, made to order.",
+    seoTitle: "Give Me a Minute Minuteman Sticker | Spirit of 1776",
+    metaDescription: "Shop the four-inch Give Me a Minute die-cut vinyl sticker, featuring a frazzled chibi minuteman with a matte finish and made-to-order printing.",
     longDescription: "Give Me a Minute is for anyone who has ever been called to action before finding the other boot. This panicked little minuteman is ready for notebooks, bottles, and everyday emergencies.",
     specifications: stickerSpecifications,
     materials: ["Premium white vinyl", "Matte protective laminate"],
@@ -157,7 +157,7 @@ export const products = [
     storeUrl: STORE_URL,
     analyticsLabel: "give_me_a_minute_sticker",
     availability: "live",
-    modifiedDate: "2026-09-12",
+    modifiedDate: "2026-09-15",
     relatedStorySlugs: ["lexington-and-concord"]
   },
   {
@@ -173,8 +173,8 @@ export const products = [
     image: "/assets/products/liber-tea-mug.webp",
     alt: "Horizontal mug artwork with cheerful chibi patriot raising an oversized steaming teacup",
     description: "An 11-ounce white ceramic mug for tea, coffee, and very serious puns about self-government.",
-    seoTitle: "Liber-Tea Mug | Spirit of 1776",
-    metaDescription: "Shop the 11-ounce Liber-Tea glossy white ceramic mug with a two-sided chibi patriot design.",
+    seoTitle: "Liber-Tea 11-Ounce Chibi History Mug | Spirit of 1776",
+    metaDescription: "Shop the 11-ounce Liber-Tea glossy white ceramic mug with a two-sided chibi patriot design, microwave-safe construction, and made-to-order printing.",
     longDescription: "Liber-Tea serves a very serious self-government pun with every cup. The cheerful patriot and oversized teacup wrap around an 11-ounce white mug.",
     specifications: ["11-ounce mug", "Glossy ceramic finish", "Two-sided dye-sublimation print", "Microwave-safe", "BPA-free"],
     materials: ["White glossy ceramic"],
@@ -192,7 +192,7 @@ export const products = [
     storeUrl: STORE_URL,
     analyticsLabel: "liber_tea_mug",
     availability: "live",
-    modifiedDate: "2026-09-12",
+    modifiedDate: "2026-09-15",
     relatedStorySlugs: ["declaration-of-independence"]
   },
   {
@@ -208,8 +208,8 @@ export const products = [
     image: "/assets/products/liber-tea-sticker.webp",
     alt: "Cheerful chibi patriot lifting an oversized steaming teacup with broken tea crates nearby",
     description: "A four-inch die-cut sticker for history fans who appreciate a well-timed tea joke.",
-    seoTitle: "Liber-Tea Sticker | Spirit of 1776",
-    metaDescription: "Shop the four-inch Liber-Tea chibi patriot matte die-cut vinyl sticker, made to order.",
+    seoTitle: "Liber-Tea Die-Cut Chibi Sticker | Spirit of 1776",
+    metaDescription: "Shop the four-inch Liber-Tea die-cut vinyl sticker, featuring a cheerful chibi patriot, oversized teacup, matte finish, and made-to-order printing.",
     longDescription: "Liber-Tea turns a well-timed tea joke into a four-inch die-cut sticker. It is a cheerful little reminder that history and humor can share the same cup.",
     specifications: stickerSpecifications,
     materials: ["Premium white vinyl", "Matte protective laminate"],
@@ -227,7 +227,7 @@ export const products = [
     storeUrl: STORE_URL,
     analyticsLabel: "liber_tea_sticker",
     availability: "live",
-    modifiedDate: "2026-09-12",
+    modifiedDate: "2026-09-15",
     relatedStorySlugs: ["declaration-of-independence"]
   }
 ];
